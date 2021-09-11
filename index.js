@@ -12,6 +12,33 @@ module.exports = (homebridge) => {
     homebridge.registerPlatform(PLUGIN_NAME, PLATFORM_NAME, KasaLightstripPluginPlatform, true);
 };
 
+class KasaLightstripPluginPlatform {
+    constructor(log, config, api) {
+        if (!config) return;
+
+        this.log = log;
+        this.api = api;
+        this.config = config;
+
+        if(this.api) this.api.on('didFinishLaunching', this.initAccessory.bind(this));
+    }
+
+    initAccessory() {
+        //read from config.accessories
+        if(this.config.accessories && Array.isArray(this.config.accessories)) {
+            for (let lightstrip of this.config.accessories) {
+                if(lightstrip) new KasaLightstripPlugin(this.log, lightstrip, this.api);
+            }
+        } else if (this.config.accessories) {
+            this.log.info('Cannot initialize. Type %s', typeof this.config.accessories);
+        }
+
+        if(!this.config.accessories) {
+            this.log.info('Please add one or more accessories in your config');
+        }
+    }
+}
+
 class KasaLightstripPlugin {
     constructor(log, config, api) {
         if(!config) return;
@@ -31,7 +58,9 @@ class KasaLightstripPlugin {
         this.device = new this.api.platformAccessory(this.name, uuid);
         this.device.category = this.api.hap.Categories.LIGHTBULB;
         this.deviceService = this.device.addService(Service.Lightbulb);
+        this.deviceService.setCharacteristic(Characteristic.ConfiguredName, this.name);
         this.deviceInfo = this.device.getService(Service.AccessoryInformation);
+        this.handleOn();
     }
 
     handleOn() {
@@ -60,32 +89,5 @@ class KasaLightstripPlugin {
                 if(callback) callback(this.awake);
             }
         });
-    }
-}
-
-class KasaLightstripPluginPlatform {
-    constructor(log, config, api) {
-        if (!config) return;
-
-        this.log = log;
-        this.api = api;
-        this.config = config;
-
-        if(this.api) this.api.on('didFinishLaunching', this.initAccessory.bind(this));
-    }
-
-    initAccessory() {
-        //read from config.accessories
-        if(this.config.accessories && Array.isArray(this.config.accessories)) {
-            for (let lightstrip of this.config.accessories) {
-                if(lightstrip) new KasaLightstripPlugin(this.log, lightstrip, this.api);
-            }
-        } else if (this.config.accessories) {
-            this.log.info('Cannot initialize. Type %s', typeof this.config.accessories);
-        }
-
-        if(!this.config.accessories) {
-            this.log.info('Please add one or more accessories in your config');
-        }
     }
 }
