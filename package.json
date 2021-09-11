@@ -1,0 +1,30 @@
+{
+  "name": "homebridge-kasa-lightstrip",
+  "version": "0.1.0",
+  "description": "A simple homebridge plugin to control TP-Link Kasa Lightstrips (ex. KL4005L)",
+  "main": "index.js",
+  "engines": {
+    "node": ">=12.9.0",
+    "homebridge": ">=1.0.0"
+  },
+  "scripts": {
+    "watch": "npm link && nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steveredden/homebridge-kasa-lighstrip.git"
+  },
+  "keywords": [
+    "homebridge",
+    "homebridge-plugin",
+    "kasa",
+    "lightstrip",
+    "homekit"
+  ],
+  "author": "steveredden",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/steveredden/homebridge-kasa-lightstrip/issues"
+  },
+  "homepage": "https://github.com/steveredden/homebridge-kasa-lightstrip#readme"
+}

@@ -1,0 +1,68 @@
+{
+  "pluginAlias": "HomebridgeKasaLightstrip",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "Plugin to utilize [python-kasa](https://github.com/python-kasa/python-kasa) to control Kasa Lightstrips",
+  "footerDisplay": "For more information, see the [README](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/master/README.md)",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "accessories": {
+        "title": "Light Strips",
+        "type": "array",
+        "required": true,
+        "items": {
+          "ip": {
+            "title": "Device IP",
+            "type": "string",
+            "required": true,
+            "format": "ipv4",
+            "placeholder": "Type your device IP address"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string",
+            "required": true,
+            "placeholder": "Type your device Name/Alias"
+          }
+        }
+      }
+    }
+  },
+  "layout": [
+    {
+      "key": "accessories",
+      "type": "array",
+      "items": [
+        {
+          "type": "flex",
+          "displayFlex": true,
+          "items": [
+            {
+              "type": "flex",
+              "displayFlex": true,
+              "flex-direction": "row",
+              "items": [
+                {
+                  "key": "accessories[].name",
+                  "flex": "2 2 200px"
+                }
+              ]
+            },
+            {
+              "type": "flex",
+              "displayFlex": true,
+              "flex-direction": "row",
+              "items": [
+                {
+                  "key": "accessories[].ip",
+                  "flex": "2 2 200px"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
