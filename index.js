@@ -72,12 +72,13 @@ class KasaLightstripPlugin {
         this.device = new this.api.platformAccessory(this.lightstripname, uuid);
         this.device.category = this.api.hap.Categories.LIGHTBULB;
         this.deviceService = this.device.addService(Service.Lightbulb);
-        this.deviceService.setCharacteristic(Characteristic.ConfiguredName, this.name);
+        this.deviceService.setCharacteristic(Characteristic.ConfiguredName, this.lightstripname);
         this.handlePower();
         this.handleBrightness();
         this.handleHue();
         this.handleSaturation();
         this.api.publishExternalAccessories(PLUGIN_NAME, [this.device]);
+        
 		this.log.info(this.lightstripname, `- Created`);
     }
 
