@@ -76,6 +76,10 @@ class KasaLightstripPlugin {
             .on('set', (state, callback) => {
                 this.debugLog(`Calling:  kasa --host ${this.ip} --lightstrip ${state}`);
                 exec(`kasa --host ${this.ip} --lightstrip ${state}`, (err, stdout, stderr) => {
+                    if(err) {
+                        this.log.info(this.name, " - Error setting characteristic 'On'");
+                        this.debugLog("handleOn - Error - " + stderr.trim());
+                    }
                     this.deviceService.updateCharacteristic(Characteristic.On, state)
                 })
                 callback(null)
