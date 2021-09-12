@@ -19,6 +19,7 @@ class KasaLightstripPluginPlatform {
         this.log = log;
         this.api = api;
         this.config = config;
+        this.debug = this.config.debug || false
 
         if(this.api) this.api.on('didFinishLaunching', this.initAccessory.bind(this));
     }
@@ -27,7 +28,7 @@ class KasaLightstripPluginPlatform {
         //read from config.accessories
         if(this.config.accessories && Array.isArray(this.config.accessories)) {
             for (let lightstrip of this.config.accessories) {
-                if(lightstrip) new KasaLightstripPlugin(this.log, lightstrip, this.api);
+                if(lightstrip) new KasaLightstripPlugin(this.log, lightstrip, this.api, this.debug);
             }
         } else if (this.config.accessories) {
             this.log.info('Cannot initialize. Type %s', typeof this.config.accessories);
@@ -40,7 +41,7 @@ class KasaLightstripPluginPlatform {
 }
 
 class KasaLightstripPlugin {
-    constructor(log, config, api) {
+    constructor(log, config, api, debug) {
         if(!config) return;
 
         this.log = log;
@@ -52,7 +53,7 @@ class KasaLightstripPlugin {
         if(!this.ip) {
             this.log.error(`\n\nMissing IP for lightstrip accessory '${this.name}'`);
         }
-        this.debug = this.config.debug || false;
+        this.debug = debug;
 
         //Create Accessory
         const uuid = this.api.hap.uuid.generate('homebridge:kasa-lightstrip' + this.ip + this.name);
