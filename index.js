@@ -102,7 +102,7 @@ class KasaLightstripPlugin {
     checkPower(callback) {
         if(!this.checkingOn) {
             this.checkingOn = true;
-            this.debugLog(`checkPower:  kasa --host ${this.ip} --lightstrip`);
+            this.debugLog(`checkPower: 'kasa --host ${this.ip} --lightstrip'`);
             exec(`kasa --host ${this.ip} --lightstrip`, (err, stdout, stderr) => {
                 if(err) {
                     this.on = false;
@@ -141,7 +141,7 @@ class KasaLightstripPlugin {
     checkBrightness(callback) {
         if(!this.checkingBrightness) {
             this.checkingBrightness = true;
-            this.debugLog(`checkBrightness:  kasa --host ${this.ip} --lightstrip brightness`);
+            this.debugLog(`checkBrightness: 'kasa --host ${this.ip} --lightstrip brightness'`);
             exec(`kasa --host ${this.ip} --lightstrip brightness`, (err, stdout, stderr) => {
                 if(err) {
                     this.brightness = undefined;
@@ -187,8 +187,8 @@ class KasaLightstripPlugin {
                     if(callback) callback('error');
                 } else {
                     stdout = stdout.split("\n");
-                    this.debugLog(`Output: ${stdout[0].trim()}\nHue: ${(stdout[0].split("(")[1]).split(",")[0]}\nSaturation: ${(stdout[0].split("(")[1]).split(",")[1].trim()}`);
-                    this.hue = (stdout[0].split("(")[1]).split(" ")[0];
+                    this.debugLog(stdout[0].trim());
+                    this.hue = (stdout[0].split("(")[1]).split(",")[0].trim();
                     this.saturation = (stdout[0].split("(")[1]).split(",")[1].trim();
                     if(callback) callback(this.hue);
                 }
@@ -227,8 +227,8 @@ class KasaLightstripPlugin {
                     if(callback) callback('error');
                 } else {
                     stdout = stdout.split("\n");
-                    this.debugLog(`Output: ${stdout[0].trim()}\nHue: ${(stdout[0].split("(")[1]).split(",")[0]}\nSaturation: ${(stdout[0].split("(")[1]).split(",")[1].trim()}`);
-                    this.hue = (stdout[0].split("(")[1]).split(" ")[0];
+                    this.debugLog(stdout[0].trim());
+                    this.hue = (stdout[0].split("(")[1]).split(",")[0].trim();
                     this.saturation = (stdout[0].split("(")[1]).split(",")[1].trim();
                     if(callback) callback(this.saturation);
                 }
