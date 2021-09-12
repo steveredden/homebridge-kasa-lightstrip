@@ -8,61 +8,29 @@
     "type": "object",
     "properties": {
       "accessories": {
-        "title": "Light Strips",
+        "title": "Light Strip Accessories",
         "type": "array",
         "required": true,
         "items": {
-          "ip": {
-            "title": "Device IP",
-            "type": "string",
-            "required": true,
-            "format": "ipv4",
-            "placeholder": "Type your device IP address"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string",
-            "required": true,
-            "placeholder": "Type your device Name/Alias"
+          "type": "object",
+          "properties": {
+            "name": {
+              "title": "Device Name",
+              "placeholder": "Type your device name",
+              "type": "string",
+              "minLength": 1,
+              "required": true
+            },
+            "ip": {
+              "title": "Device IP",
+              "placeholder": "Type your device IP address",
+              "type": "string",
+              "format": "ipv4",
+              "required": true
+            }
           }
         }
       }
     }
-  },
-  "layout": [
-    {
-      "key": "accessories",
-      "type": "array",
-      "items": [
-        {
-          "type": "flex",
-          "displayFlex": true,
-          "items": [
-            {
-              "type": "flex",
-              "displayFlex": true,
-              "flex-direction": "row",
-              "items": [
-                {
-                  "key": "accessories[].name",
-                  "flex": "2 2 200px"
-                }
-              ]
-            },
-            {
-              "type": "flex",
-              "displayFlex": true,
-              "flex-direction": "row",
-              "items": [
-                {
-                  "key": "accessories[].ip",
-                  "flex": "2 2 200px"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  }
 }
