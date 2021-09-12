@@ -4,39 +4,38 @@ let Service, Characteristic, Homebridge, Accessory;
 const PLUGIN_NAME = 'homebridge-kasa-lightstrip';
 const PLATFORM_NAME = 'KasaLightstrip';
 
-module.exports = (homebridge) => {
-    Service = homebridge.hap.Service;
-    Characteristic = homebridge.hap.Characteristic;
-    Homebridge = homebridge;
-    Accessory = homebridge.platformAccessory;
-    homebridge.registerPlatform(PLUGIN_NAME, PLATFORM_NAME, KasaLightstripPluginPlatform, true);
+module.exports = (api) => {
+    api.registerPlatform(PLATFORM_NAME, KasaLightstripPluginPlatform);
 };
 
 class KasaLightstripPluginPlatform {
     constructor(log, config, api) {
         if (!config) return;
 
+        this.accessories = [];
+
         this.log = log;
-        this.api = api;
         this.config = config;
+        this.api = api;
         this.debug = this.config.debug || false;
 
-        if(this.api) this.api.on('didFinishLaunching', this.initAccessory.bind(this));
+        this.api.on('didFinishLaunching', () => {
+            if(this.config.accessories && Array.isArray(this.config.accessories)) {
+                for (let lightstrip of this.config.accessories) {
+                    const uuid = this.api.hap.uuid.generate('homebridge-kasa-lightstrip' + lightstrip.name + lightstrip.ip )
+
+                    if(!this.accessories.find(accessory => accessory.UUID === uuid)) {
+                        const accessory = new this.api.platformAccessory(this.name, uuid);
+                    } else {
+                        new KasaLightstripPlugin(this.log, lightstrip, this.api, this.debug);
+                    }
+                }
+            }
+        });
     }
 
-    initAccessory() {
-        //read from config.accessories
-        if(this.config.accessories && Array.isArray(this.config.accessories)) {
-            for (let lightstrip of this.config.accessories) {
-                if(lightstrip) new KasaLightstripPlugin(this.log, lightstrip, this.api, this.debug);
-            }
-        } else if (this.config.accessories) {
-            this.log.info('Cannot initialize. Type %s', typeof this.config.accessories);
-        }
-
-        if(!this.config.accessories) {
-            this.log.info('Please add one or more accessories in your config');
-        }
+    configureAccessory(accessory) {
+        this.accessories.push(accessory);
     }
 }
 
@@ -68,7 +67,7 @@ class KasaLightstripPlugin {
         this.checkingHSV = false;
 
         //Create Accessory
-        const uuid = this.api.hap.uuid.generate('homebridge-kasa-lightstrip' + this.ip + this.name);
+        const uuid = this.api.hap.uuid.generate('homebridge-kasa-lightstrip');
         this.device = new this.api.platformAccessory(this.name, uuid);
         this.device.category = this.api.hap.Categories.LIGHTBULB;
         this.deviceService = this.device.addService(Service.Lightbulb);
