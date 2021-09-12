@@ -1,18 +1,18 @@
 let exec = require('child_process').exec;
-let Service, Characteristic, Homebridge, Accessory;
+let Service, Characteristic;
 
 const PLUGIN_NAME = 'homebridge-kasa-lightstrip';
 const PLATFORM_NAME = 'HomebridgeKasaLightstrip';
 
 module.exports = (api) => {
-    Service = api.hap.Service
-    Characteristic = api.hap.Characteristic
+    Service = api.hap.Service;
+    Characteristic = api.hap.Characteristic;
     api.registerPlatform(PLATFORM_NAME, KasaLightstripPluginPlatform);
 };
 
 class KasaLightstripPluginPlatform {
     constructor(log, config, api) {
-        if (!config) return;
+        if (!config || !config.accessories) return;
 
         this.accessories = [];
 
@@ -24,7 +24,7 @@ class KasaLightstripPluginPlatform {
         this.api.on('didFinishLaunching', () => {
             if(this.config.accessories && Array.isArray(this.config.accessories)) {
                 for (let lightstrip of this.config.accessories) {
-                    const uuid = this.api.hap.uuid.generate('homebridge-kasa-lightstrip' + lightstrip.name + lightstrip.ip )
+                    const uuid = this.api.hap.uuid.generate('homebridge-kasa-lightstrip' + lightstrip.name + lightstrip.ip );
 
                     if(!this.accessories.find(accessory => accessory.UUID === uuid)) {
                         new KasaLightstripPlugin(this.log, lightstrip, this.api, this.debug, uuid);
@@ -88,7 +88,7 @@ class KasaLightstripPlugin {
                         this.debugLog("SetPower - Error - " + stderr.trim());
                     }
                     this.deviceService.updateCharacteristic(Characteristic.On, state);
-                })
+                });
             }).onGet(async () => {
                 if(!this.checkingOn) {
                     this.checkingOn = true;
@@ -119,7 +119,7 @@ class KasaLightstripPlugin {
                         this.debugLog("handleBrightness - Error - " + stderr.trim());
                     }
                     this.deviceService.updateCharacteristic(Characteristic.Brightness, state);
-                })
+                });
             }).onGet(async () => {
                 if(!this.checkingBrightness) {
                     this.checkingBrightness = true;
@@ -181,8 +181,8 @@ class KasaLightstripPlugin {
 
     SetColor() {
         if(this.tempHue != undefined && this.tempSaturation != undefined) {
-            let hue = this.tempHue
-            let saturation = this.tempSaturation
+            let hue = this.tempHue;
+            let saturation = this.tempSaturation;
             this.debugLog(`SetColor: 'kasa --host ${this.ip} --lightstrip hsv ${hue} ${saturation} ${this.brightness}'`);
             exec(`kasa --host ${this.ip} --lightstrip hsv ${hue} ${saturation} ${this.brightness}`, (err, stdout, stderr) => {
                 if(err) {
@@ -191,13 +191,13 @@ class KasaLightstripPlugin {
                 }
                 this.deviceService.updateCharacteristic(Characteristic.Hue, hue);
                 this.deviceService.updateCharacteristic(Characteristic.Saturation, saturation);
-            })
+            });
             this.tempHue = undefined;
             this.tempSaturation = undefined;
         }
     }
 
     debugLog(text) {
-        if(this.debug) this.log.info(`\x1b[2m${this.name} - ${text}\x1b[0m`)
+        if(this.debug) this.log.info(`\x1b[2m${this.name} - ${text}\x1b[0m`);
     }
 }
