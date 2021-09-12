@@ -12,7 +12,7 @@ module.exports = (api) => {
 
 class KasaLightstripPluginPlatform {
     constructor(log, config, api) {
-        if (!config || !config.accessories) return;
+        if (!config) return;
 
         this.accessories = [];
 
@@ -68,16 +68,11 @@ class KasaLightstripPlugin {
         this.device.category = this.api.hap.Categories.LIGHTBULB;
         this.deviceService = this.device.addService(Service.Lightbulb);
         this.deviceService.setCharacteristic(Characteristic.ConfiguredName, this.name);
-        this.handlePower();
-        this.handleBrightness();
-        this.handleHue();
-        this.handleSaturation();
         this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [this.device]);
 
 		this.log.info(this.name, `- Created`);
-    }
 
-    handlePower() {
+        //On = boolean
         this.deviceService.getCharacteristic(Characteristic.On)
             .onSet(async (state) => {
                 var translatedState = (state == true) ? "on":"off";
@@ -107,9 +102,8 @@ class KasaLightstripPlugin {
                 }
                 return this.onStatus;
             });
-    }
-
-    handleBrightness() {
+    
+        //Brightness = int
         this.deviceService.getCharacteristic(Characteristic.Brightness)
             .onSet(async (state) => {
                 this.debugLog(`SetBrightness: 'kasa --host ${this.ip} --lightstrip brightness ${state}'`);
@@ -138,9 +132,8 @@ class KasaLightstripPlugin {
                 }
                 return this.brightness;
             });
-    }
-
-    handleHue() {
+        
+        //Hue = int
         this.deviceService.getCharacteristic(Characteristic.Hue)
             .onSet(async (state) => {
                 this.tempHue = state;
@@ -166,15 +159,14 @@ class KasaLightstripPlugin {
                 this.deviceService.updateCharacteristic(Characteristic.Saturation, this.saturation);
                 return this.hue;
             });
-    }
-
-    handleSaturation() {
+        
+        //Saturation = int
         this.deviceService.getCharacteristic(Characteristic.Saturation)
             .onSet(async (state) => { 
                 this.tempSaturation = state;
-                //let handleHue handle updating the characteristic
+                //let .Hue handle updating the characteristic
             }).onGet(async () => {
-                //do nothing; let handleHue handle the value
+                //do nothing; let .Hue handle the value
                 return this.saturation;
             });
     }
