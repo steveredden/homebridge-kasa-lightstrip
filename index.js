@@ -2,7 +2,7 @@ let exec = require('child_process').exec;
 let Service, Characteristic, Homebridge, Accessory;
 
 const PLUGIN_NAME = 'homebridge-kasa-lightstrip';
-const PLATFORM_NAME = 'HomebridgeKasaLightstrip';
+const PLATFORM_NAME = 'KasaLightstrip';
 
 module.exports = (homebridge) => {
     Service = homebridge.hap.Service;
@@ -68,7 +68,7 @@ class KasaLightstripPlugin {
         this.checkingHSV = false;
 
         //Create Accessory
-        const uuid = this.api.hap.uuid.generate('homebridge:kasa-lightstrip' + this.ip + this.name);
+        const uuid = this.api.hap.uuid.generate('homebridge-kasa-lightstrip' + this.ip + this.name);
         this.device = new this.api.platformAccessory(this.name, uuid);
         this.device.category = this.api.hap.Categories.LIGHTBULB;
         this.deviceService = this.device.addService(Service.Lightbulb);

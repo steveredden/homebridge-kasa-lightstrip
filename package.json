@@ -1,6 +1,6 @@
 {
   "name": "homebridge-kasa-lightstrip",
-  "version": "1.0.0",
+  "version": "0.1.5-dev",
   "description": "A simple homebridge plugin to control TP-Link Kasa Lightstrips (ex. KL4005L)",
   "main": "index.js",
   "engines": {
