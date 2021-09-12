@@ -2,7 +2,7 @@ let exec = require('child_process').exec;
 let Service, Characteristic, Homebridge, Accessory;
 
 const PLUGIN_NAME = 'homebridge-kasa-lightstrip';
-const PLATFORM_NAME = 'KasaLightstrip';
+const PLATFORM_NAME = 'HomebridgeKasaLightstrip';
 
 module.exports = (api) => {
     api.registerPlatform(PLATFORM_NAME, KasaLightstripPluginPlatform);
