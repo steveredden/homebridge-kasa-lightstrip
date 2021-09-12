@@ -23,7 +23,7 @@
         "items": {
           "type": "object",
           "properties": {
-            "lightstripname": {
+            "name": {
               "title": "Device Name",
               "placeholder": "Type your device name",
               "type": "string",
