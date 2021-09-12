@@ -65,3 +65,7 @@ platforms: [
   * **name** (mandatory): the name of the accessory to create
   * **ip** (mandatory): the IP address of the device
 * *debug* (optional): boolean to enable more verbose logging
+
+## Errors
+
+Errors are expected due to the nature of the implementation:  Flooding your devices with python-kasa calls will result in several dropped connections.  Just try to move the "Brightness" meter more quickly so it only attempts to set one value, etc!

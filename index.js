@@ -5,6 +5,8 @@ const PLUGIN_NAME = 'homebridge-kasa-lightstrip';
 const PLATFORM_NAME = 'HomebridgeKasaLightstrip';
 
 module.exports = (api) => {
+    Service = api.hap.Service
+    Characteristic = api.hap.Characteristic
     api.registerPlatform(PLATFORM_NAME, KasaLightstripPluginPlatform);
 };
 
@@ -25,10 +27,8 @@ class KasaLightstripPluginPlatform {
                     const uuid = this.api.hap.uuid.generate('homebridge-kasa-lightstrip' + lightstrip.name + lightstrip.ip )
 
                     if(!this.accessories.find(accessory => accessory.UUID === uuid)) {
-                        const accessory = new this.api.platformAccessory(this.name, uuid);
-                    } else {
-                        new KasaLightstripPlugin(this.log, lightstrip, this.api, this.debug);
-                    }
+                        new KasaLightstripPlugin(this.log, lightstrip, this.api, this.debug, uuid);
+                    } 
                 }
             }
         });
@@ -40,18 +40,15 @@ class KasaLightstripPluginPlatform {
 }
 
 class KasaLightstripPlugin {
-    constructor(log, config, api, debug) {
+    constructor(log, config, api, debug, uuid) {
         if(!config) return;
 
         this.log = log;
         this.config = config;
         this.api = api;
 
-        this.name = this.config.name || 'Lightstrip'
+        this.name = this.config.name
         this.ip = this.config.ip;
-        if(!this.ip) {
-            this.log.error(`\n\nMissing IP for lightstrip accessory '${this.name}'`);
-        }
         this.debug = debug;
         
         this.onStatus = false;
@@ -67,7 +64,6 @@ class KasaLightstripPlugin {
         this.checkingHSV = false;
 
         //Create Accessory
-        const uuid = this.api.hap.uuid.generate('homebridge-kasa-lightstrip');
         this.device = new this.api.platformAccessory(this.name, uuid);
         this.device.category = this.api.hap.Categories.LIGHTBULB;
         this.deviceService = this.device.addService(Service.Lightbulb);
