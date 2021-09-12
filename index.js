@@ -50,8 +50,9 @@ class KasaLightstripPlugin {
         this.name = this.config.name || 'Lightstrip'
         this.ip = this.config.ip;
         if(!this.ip) {
-            this.log.error(`\n\nMissing IP for lightstrip accessory`);
+            this.log.error(`\n\nMissing IP for lightstrip accessory '${this.name}'`);
         }
+        this.debug = this.config.debug || false;
 
         //Create Accessory
         const uuid = this.api.hap.uuid.generate('homebridge:kasa-lightstrip' + this.ip + this.name);
@@ -67,11 +68,13 @@ class KasaLightstripPlugin {
         this.deviceService.getCharacteristic(Characteristic.On)
             .on('get', (callback) => {
                 this.checkPower(() => {
+                    this.debugLog(`Retrieved ${this.awake}`);
                     this.deviceService.setCharacteristic(Characteristic.On, this.awake)
                 })
                 callback(null, this.awake);
             })
             .on('set', (state, callback) => {
+                this.debugLog(`Calling:  kasa --host ${this.ip} --lightstrip ${state}`);
                 exec(`kasa --host ${this.ip} --lightstrip ${state}`, (err, stdout, stderr) => {
                     this.deviceService.updateCharacteristic(Characteristic.On, state)
                 })
@@ -80,6 +83,7 @@ class KasaLightstripPlugin {
     }
 
     checkPower(callback) {
+        this.debugLog(`Calling:  kasa --host ${this.ip} --lightstrip`);
         exec(`kasa --host ${this.ip} --lightstrip`, (err, stdout, stderr) => {
             if(err) {
                 this.awake = 0;
@@ -89,5 +93,9 @@ class KasaLightstripPlugin {
                 if(callback) callback(this.awake);
             }
         });
+    }
+
+    debugLog(text) {
+        if(this.debug) this.log.info(`\x1b[2m${this.name} - ${text}\x1b[0m`)
     }
 }

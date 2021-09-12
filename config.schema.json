@@ -7,6 +7,15 @@
   "schema": {
     "type": "object",
     "properties": {
+      "debug": {
+        "title": "Enable debug logs",
+        "type": "boolean",
+	      "default": "",
+		    "oneOf": [
+		      { "title": "Yes", "enum": ["true"] },
+		      { "title": "No", "enum": ["false"] }
+		    ]
+      },
       "accessories": {
         "title": "Light Strip Accessories",
         "type": "array",
