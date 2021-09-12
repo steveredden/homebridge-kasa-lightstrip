@@ -76,6 +76,11 @@ class KasaLightstripPlugin {
 
         this.log.info(this.name, `- Created`);
 
+        this.updateAllCharacteristics();
+    }
+
+    updateAllCharacteristics() {
+
         //On = boolean
         this.deviceService.getCharacteristic(Characteristic.On)
             .onSet(async (state) => {
@@ -174,6 +179,8 @@ class KasaLightstripPlugin {
                 return this.saturation;
             });
     }
+
+    //helpers
 
     SetColor() {
         if(this.tempHue != undefined && this.tempSaturation != undefined) {
