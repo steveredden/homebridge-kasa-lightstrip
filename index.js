@@ -12,7 +12,7 @@ module.exports = (api) => {
 
 class KasaLightstripPluginPlatform {
     constructor(log, config, api) {
-        if (!config) return;
+        if (!config || !Array.isArray(config.accessories)) return;
 
         this.accessories = [];
 
@@ -36,6 +36,10 @@ class KasaLightstripPluginPlatform {
 
     configureAccessory(accessory) {
         this.accessories.push(accessory);
+    }
+
+    removeAccessory(accessory) {
+        this.api.unregisterPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [accessory]);
     }
 }
 
@@ -70,7 +74,7 @@ class KasaLightstripPlugin {
         this.deviceService.setCharacteristic(Characteristic.ConfiguredName, this.name);
         this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [this.device]);
 
-		this.log.info(this.name, `- Created`);
+        this.log.info(this.name, `- Created`);
 
         //On = boolean
         this.deviceService.getCharacteristic(Characteristic.On)
