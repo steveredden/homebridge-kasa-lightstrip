@@ -62,7 +62,7 @@ class KasaLightstripPlugin {
 
         this.checkingOn = false;
         this.checkingBrightness = false;
-        this.checkingColor = false;
+        this.checkingHSV = false;
 
         //Create Accessory
         const uuid = this.api.hap.uuid.generate('homebridge:kasa-lightstrip' + this.ip + this.lightstripname);
@@ -144,7 +144,7 @@ class KasaLightstripPlugin {
             this.debugLog(`checkBrightness: 'kasa --host ${this.ip} --lightstrip brightness'`);
             exec(`kasa --host ${this.ip} --lightstrip brightness`, (err, stdout, stderr) => {
                 if(err) {
-                    this.brightness = undefined;
+                    this.brightness = 100;
                     if(callback) callback('error');
                 } else {
                     stdout = stdout.split("\n");
@@ -160,6 +160,7 @@ class KasaLightstripPlugin {
     handleHue() {
         this.deviceService.getCharacteristic(Characteristic.Hue)
             .on('set', (state, callback) => {
+                this.checkSaturation();
                 this.debugLog(`handleHue: 'kasa --host ${this.ip} --lightstrip hsv ${state} ${this.saturation} ${this.brightness}'`);
                 exec(`kasa --host ${this.ip} --lightstrip hsv ${state} ${this.saturation} ${this.brightness}`, (err, stdout, stderr) => {
                     if(err) {
@@ -178,28 +179,29 @@ class KasaLightstripPlugin {
     }
 
     checkHue(callback) {
-        if(!this.checkingColor) {
-            this.checkingColor = true;
+        if(!this.checkingHSV) {
+            this.checkingHSV = true;
             this.debugLog(`checkHue: 'kasa --host ${this.ip} --lightstrip hsv'`);
             exec(`kasa --host ${this.ip} --lightstrip hsv`, (err, stdout, stderr) => {
                 if(err) {
-                    this.hue = undefined;
+                    this.hue = 0;
                     if(callback) callback('error');
                 } else {
                     stdout = stdout.split("\n");
-                    this.debugLog(stdout[0].trim());
+                    this.debugLog(stdout[0].trim());  //expects "Current HSV: ($h, $s, $b)"
                     this.hue = (stdout[0].split("(")[1]).split(",")[0].trim();
                     this.saturation = (stdout[0].split("(")[1]).split(",")[1].trim();
                     if(callback) callback(this.hue);
                 }
-                this.checkingColor = false;
+                this.checkingHSV = false;
             });
         }
     }
 
     handleSaturation() {
         this.deviceService.getCharacteristic(Characteristic.Saturation)
-            .on('set', (state, callback) => {
+            .on('set', (state, callback) => { 
+                this.checkHue();
                 this.debugLog(`handleSaturation: 'kasa --host ${this.ip} --lightstrip hsv ${this.hue} ${state} ${this.brightness}'`);
                 exec(`kasa --host ${this.ip} --lightstrip hsv ${this.hue} ${state} ${this.brightness}`, (err, stdout, stderr) => {
                     if(err) {
@@ -218,21 +220,21 @@ class KasaLightstripPlugin {
     }
 
     checkSaturation(callback) {
-        if(!this.checkingColor) {
-            this.checkingColor = true;
+        if(!this.checkingHSV) {
+            this.checkingHSV = true;
             this.debugLog(`checkSaturation: 'kasa --host ${this.ip} --lightstrip hsv'`);
             exec(`kasa --host ${this.ip} --lightstrip hsv`, (err, stdout, stderr) => {
                 if(err) {
-                    this.hue = undefined;
+                    this.saturation = 0;
                     if(callback) callback('error');
                 } else {
                     stdout = stdout.split("\n");
-                    this.debugLog(stdout[0].trim());
+                    this.debugLog(stdout[0].trim());  //expects "Current HSV: ($h, $s, $b)"
                     this.hue = (stdout[0].split("(")[1]).split(",")[0].trim();
                     this.saturation = (stdout[0].split("(")[1]).split(",")[1].trim();
                     if(callback) callback(this.saturation);
                 }
-                this.checkingColor = false;
+                this.checkingHSV = false;
             });
         }
     }
