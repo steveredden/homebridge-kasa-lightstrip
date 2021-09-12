@@ -54,6 +54,7 @@ class KasaLightstripPlugin {
         this.name = this.config.name
         this.ip = this.config.ip;
         this.debug = debug;
+        this.refreshInterval = 5;
         
         this.onStatus = false;
         this.brightness = 100;
@@ -76,10 +77,12 @@ class KasaLightstripPlugin {
 
         this.log.info(this.name, `- Created`);
 
-        this.updateAllCharacteristics();
+        setInterval(function() {
+            this.updateAllCharacteristics();
+        }.bind(this), this.refreshInterval * 1000);
     }
 
-    updateAllCharacteristics() {
+    async updateAllCharacteristics() {
 
         //On = boolean
         this.deviceService.getCharacteristic(Characteristic.On)
