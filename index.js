@@ -77,7 +77,7 @@ class KasaLightstripPlugin {
         this.handleBrightness();
         this.handleHue();
         this.handleSaturation();
-        this.api.publishExternalAccessories(PLUGIN_NAME, [this.device]);
+        this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [this.device]);
 
 		this.log.info(this.name, `- Created`);
     }
