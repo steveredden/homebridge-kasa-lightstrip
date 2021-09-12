@@ -56,9 +56,14 @@ class KasaLightstripPlugin {
         this.debug = debug;
         
         this.awake = false;
-        this.brightness = 100;
+        this.brightness = undefined;
+        this.hue = undefined;
+        this.saturation = undefined;
+
         this.checkingOn = false;
         this.checkingBrightness = false;
+        this.checkingHue = false;
+        this.checkingSaturation = false;
 
         //Create Accessory
         const uuid = this.api.hap.uuid.generate('homebridge:kasa-lightstrip' + this.ip + this.lightstripname);
@@ -147,6 +152,86 @@ class KasaLightstripPlugin {
                     if(callback) callback(this.brightness);
                 }
                 this.checkingBrightness = false;
+            });
+        }
+    }
+
+    handleHue() {
+        this.deviceService.getCharacteristic(Characteristic.Hue)
+            .on('set', (state, callback) => {
+                this.debugLog(`Calling: 'kasa --host ${this.ip} --lightstrip hsv ${state} ${this.saturation} ${this.brightness}'`);
+                exec(`kasa --host ${this.ip} --lightstrip hsv ${state} ${this.saturation} ${this.brightness}`, (err, stdout, stderr) => {
+                    if(err) {
+                        this.log.info(this.lightstripname, " - Error setting characteristic 'Hue'");
+                        this.debugLog("handleHue - Error - " + stderr.trim());
+                    }
+                    this.deviceService.updateCharacteristic(Characteristic.Hue, state);
+                })
+                callback(null);
+            }).on('get', (callback) => {
+                this.checkHue(() => {
+                    this.deviceService.updateCharacteristic(Characteristic.Hue, this.hue);
+                })
+                callback(null, this.hue);
+            })
+    }
+
+    checkHue(callback) {
+        if(!this.checkingHue) {
+            this.checkingHue = true;
+            this.debugLog(`Calling:  kasa --host ${this.ip} --lightstrip hsv`);
+            exec(`kasa --host ${this.ip} --lightstrip hsv`, (err, stdout, stderr) => {
+                if(err) {
+                    this.hue = undefined;
+                    if(callback) callback('error');
+                } else {
+                    stdout = stdout.split("\n");
+                    this.debugLog(`Output: ${stdout[0].trim()}\nHue: ${(stdout[0].split("(")[1]).split(",")[0]}\nSaturation: ${(stdout[0].split("(")[1]).split(",")[1].trim()}`);
+                    this.hue = (stdout[0].split("(")[1]).split(" ")[0];
+                    this.saturation = (stdout[0].split("(")[1]).split(",")[1].trim();
+                    if(callback) callback(this.hue);
+                }
+                this.checkingHue = false;
+            });
+        }
+    }
+
+    handleSaturation() {
+        this.deviceService.getCharacteristic(Characteristic.Hue)
+            .on('set', (state, callback) => {
+                this.debugLog(`Calling: 'kasa --host ${this.ip} --lightstrip hsv ${this.hue} ${state} ${this.brightness}'`);
+                exec(`kasa --host ${this.ip} --lightstrip hsv ${this.hue} ${state} ${this.brightness}`, (err, stdout, stderr) => {
+                    if(err) {
+                        this.log.info(this.lightstripname, " - Error setting characteristic 'Saturation'");
+                        this.debugLog("handleSaturation - Error - " + stderr.trim());
+                    }
+                    this.deviceService.updateCharacteristic(Characteristic.Saturation, state);
+                })
+                callback(null);
+            }).on('get', (callback) => {
+                this.checkSaturation(() => {
+                    this.deviceService.updateCharacteristic(Characteristic.Saturation, this.hue);
+                })
+                callback(null, this.saturation);
+            })
+    }
+
+    checkSaturation(callback) {
+        if(!this.checkingSaturation) {
+            this.checkingSaturation = true;
+            this.debugLog(`Calling:  kasa --host ${this.ip} --lightstrip hsv`);
+            exec(`kasa --host ${this.ip} --lightstrip hsv`, (err, stdout, stderr) => {
+                if(err) {
+                    this.hue = undefined;
+                    if(callback) callback('error');
+                } else {
+                    stdout = stdout.split("\n");
+                    this.debugLog(`Output: ${stdout[0].trim()}\nHue: ${(stdout[0].split("(")[1]).split(",")[0]}\nSaturation: ${(stdout[0].split("(")[1]).split(",")[1].trim()}`);
+                    this.hue = (stdout[0].split("(")[1]).split(" ")[0];
+                    this.saturation = (stdout[0].split("(")[1]).split(",")[1].trim();
+                    if(callback) callback(this.saturation);
+                }
+                this.checkingSaturation = false;
             });
         }
     }
