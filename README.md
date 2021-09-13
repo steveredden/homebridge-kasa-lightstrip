@@ -2,7 +2,7 @@
     <img src="https://github.com/homebridge/branding/raw/master/logos/homebridge-wordmark-logo-vertical.png" width="150">
 </p>
 
-[![GitHub license](https://badgen.net/github/license/steveredden/homebridge-kasa-lightstrip)](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/master/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/steveredden/homebridge-kasa-lightstrip.svg)](https://GitHub.com/steveredden/homebridge-kasa-lightstrip/issues/)
+[![GitHub license](https://badgen.net/github/license/steveredden/homebridge-kasa-lightstrip)](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/main/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/steveredden/homebridge-kasa-lightstrip.svg)](https://GitHub.com/steveredden/homebridge-kasa-lightstrip/issues/)
 [![Npm package version](https://badgen.net/npm/v/homebridge-kasa-lightstrip)](https://npmjs.com/package/homebridge-kasa-lightstrip) [![Npm package total downloads](https://badgen.net/npm/dt/homebridge-kasa-lightstrip)](https://www.npmjs.com/package/homebridge-kasa-lightstrip)
 
 
