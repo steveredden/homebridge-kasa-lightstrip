@@ -185,7 +185,11 @@ class KasaLightstripPlugin {
                 if(err) this.debugLog("SetColor - Error - " + this.name + ": " + stderr.trim());
                 this.hue = hue;
                 this.saturation = saturation;
-                if(this.onStatus === false) this.deviceService.updateCharacteristic(Characteristic.On, true);    //can't change the color without turning on the light (not sure if that's a kasa thing or a python-kasa thing)
+                if(this.onStatus == false) {
+                    //can't change the color without turning on the light
+                    this.onStatus = true;
+                    this.deviceService.updateCharacteristic(Characteristic.On, this.onStatus);
+                }
             });
             this.tempHue = undefined;
             this.tempSaturation = undefined;
