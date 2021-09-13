@@ -32,7 +32,7 @@ You can validate that the `python-kasa` library is installed by executing `kasa 
 
 ![kasa --help output](img/validatePython-kasa.png)
 
-You should see something similar the above output.  If you do not, and you see something like `-bash: kasa: command not found` you will need to install it (as seen above), or find a way to get it into your environment.  Reviewing the [python-kasa repo](https://github.com/python-kasa/python-kasa#readme) for additional instructions.
+You should see something similar the above output.  If you do not, and you see something like `-bash: kasa: command not found` you will need to install it (as seen above), or find a way to get it into your environment.  Review the [python-kasa repo](https://github.com/python-kasa/python-kasa#readme) for additional instructions.
 
 ## Installation Instructions
 
@@ -83,4 +83,3 @@ platforms: [
 ## Errors in Debug Logs
 
 If you have enabled debug logging, erorrs like `ConnectionResetError: [Errno 104] Connection reset by peer` are common due to the nature of the implementation:  Flooding your devices with rapid `python-kasa` calls may result in several dropped connections!
-
