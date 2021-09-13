@@ -7,14 +7,17 @@
   "schema": {
     "type": "object",
     "properties": {
+      "name": {
+        "type": "string",
+        "default": "KasaLightstrip",
+        "condition": {
+          "functionBody": "return false;"
+        }
+      },
       "debug": {
         "title": "Enable debug logs",
         "type": "boolean",
-	      "default": "",
-		    "oneOf": [
-		      { "title": "Yes", "enum": ["true"] },
-		      { "title": "No", "enum": ["false"] }
-		    ]
+	      "default": ""
       },
       "accessories": {
         "title": "Light Strip Accessories",

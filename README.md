@@ -86,7 +86,7 @@ Erorrs may common due to the nature of the implementation:  Flooding your device
 It is most often seen with the Brightness slider -> as you slide, the Home app can send numerous Brightness values, resulting in numerous `kasa` executions.  You'll see the following displayed in the log:
 
 ```sh
-[homebridge-kasa-lightstrip] StripName - Error setting characteristic 'Brightness'
+[KasaLightstrip] StripName - Error setting characteristic 'Brightness'
 ```
 
 Attempt to slow your inputs! :thinking:  Or speed your swipe?! :man_shrugging:
