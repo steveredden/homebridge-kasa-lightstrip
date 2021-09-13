@@ -42,7 +42,7 @@ sudo npm install -g homebridge-kasa-lightstrip
 
 Device names and IP Addresses must be configured manually in current state:
 
-#### Example
+### Example
 
 ```json
 platforms: [
@@ -58,12 +58,13 @@ platforms: [
     }
 ]
 ```
+
 * **platform** (mandatory): the name of this plugin
 * **accessories** (mandatory):  array containing the devices and their info:
   * **name** (mandatory): the name of the accessory to create
   * **ip** (mandatory): the IP address of the device
 * *debug* (optional): boolean to enable more verbose logging
 
-## Errors
+## Errors in Debug Logs
 
-Errors are expected due to the nature of the implementation:  Flooding your devices with `python-kasa` calls will result in several dropped connections.  Just try to move the "Brightness" meter more quickly so it only attempts to set one value, etc!
+If you have enabled debug logging, erorrs like `ConnectionResetError: [Errno 104] Connection reset by peer` are common due to the nature of the implementation:  Flooding your devices with rapid `python-kasa` calls may result in several dropped connections!
