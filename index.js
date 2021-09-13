@@ -26,9 +26,9 @@ class KasaLightstripPluginPlatform {
                 for (let lightstrip of this.config.accessories) {
                     const uuid = this.api.hap.uuid.generate('homebridge-kasa-lightstrip' + lightstrip.name + lightstrip.ip );
 
-                    if(!this.accessories.find(accessory => accessory.UUID === uuid)) {
-                        new KasaLightstripPlugin(this.log, lightstrip, this.api, this.debug, uuid);
-                    } 
+                    let accessory = this.accessories.find(accessory => accessory.UUID === uuid)
+                    if(!accessory) new KasaLightstripPlugin(this.log, lightstrip, this.api, this.debug, uuid);
+                    else new KasaLightstripPlugin(this.log, lightstrip, this.api, this.debug, undefined, accessory);
                 }
             }
         });
@@ -36,6 +36,7 @@ class KasaLightstripPluginPlatform {
 
     configureAccessory(accessory) {
         this.accessories.push(accessory);
+        this.log(`Restored ${accessory.displayName} [${accessory.UUID}]`)
     }
 
     removeAccessory(accessory) {
@@ -44,12 +45,13 @@ class KasaLightstripPluginPlatform {
 }
 
 class KasaLightstripPlugin {
-    constructor(log, config, api, debug, uuid) {
+    constructor(log, config, api, debug, uuid, device) {
         if(!config) return;
 
         this.log = log;
         this.config = config;
         this.api = api;
+        this.device = device;
 
         this.name = this.config.name
         this.ip = this.config.ip;
@@ -68,14 +70,17 @@ class KasaLightstripPlugin {
         this.checkingHSV = false;
 
         //Create Accessory
-        this.device = new this.api.platformAccessory(this.name, uuid);
-        this.device.category = this.api.hap.Categories.LIGHTBULB;
-        this.deviceService = this.device.addService(Service.Lightbulb);
-        this.deviceService.setCharacteristic(Characteristic.ConfiguredName, this.name);
-        this.updateAllCharacteristics();
+        if ( uuid != undefined ) {
+            this.device = new this.api.platformAccessory(this.name, uuid);
+            this.device.category = this.api.hap.Categories.LIGHTBULB;
+            this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [this.device]);
+        }
+        this.deviceService = this.device.getService(Service.Lightbulb) || this.device.addService(Service.Lightbulb);
 
-        this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [this.device]);
-        this.log.info(this.name, `- Created`);
+        this.log.info(this.name, `- Initialized`);
+        this.debugLog(this.name + " uuid: [" + this.device.UUID + "]")
+        
+        this.updateAllCharacteristics();
     }
 
     updateAllCharacteristics() {
