@@ -36,11 +36,12 @@ class KasaLightstripPluginPlatform {
 
     configureAccessory(accessory) {
         this.accessories.push(accessory);
-        this.log(`Restored ${accessory.displayName} [${accessory.UUID}]`)
+        this.log.info(`Restored ${accessory.displayName} [${accessory.UUID}]`);
     }
 
     removeAccessory(accessory) {
         this.api.unregisterPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [accessory]);
+        this.log.info(`Removed ${accessory.displayName} [${accessory.UUID}]`);
     }
 }
 
@@ -69,7 +70,7 @@ class KasaLightstripPlugin {
         this.checkingBrightness = false;
         this.checkingHSV = false;
 
-        //Create Accessory
+        //Create Accessory if we've generated a new uuid;
         if ( uuid != undefined ) {
             this.device = new this.api.platformAccessory(this.name, uuid);
             this.device.category = this.api.hap.Categories.LIGHTBULB;
@@ -77,7 +78,7 @@ class KasaLightstripPlugin {
         }
         this.deviceService = this.device.getService(Service.Lightbulb) || this.device.addService(Service.Lightbulb);
 
-        this.log.info(this.name, `- Initialized`);
+        this.log.info(this.name + " - Initialized");
         this.debugLog(this.name + " uuid: [" + this.device.UUID + "]");
         
         this.updateAllCharacteristics();
@@ -91,7 +92,10 @@ class KasaLightstripPlugin {
                 var translatedState = (state == true) ? "on":"off";
                 this.debugLog(`SetPower: 'kasa --host ${this.ip} --lightstrip ${translatedState}'`);
                 exec(`kasa --host ${this.ip} --lightstrip ${translatedState}`, (err, stdout, stderr) => {
-                    if(err) this.debugLog("SetPower - Error - " + this.name + ": " + stderr.trim());
+                    if(err) {
+                        this.log.info(this.name + " - Error setting characteristic 'On'");
+                        this.debugLog("SetPower - Error - " + this.name + ": " + stderr.trim());
+                    }
                     this.onStatus = state;
                 });
             }).onGet(async () => {
@@ -100,6 +104,7 @@ class KasaLightstripPlugin {
                     this.debugLog(`GetPower: 'kasa --host ${this.ip} --lightstrip'`);
                     exec(`kasa --host ${this.ip} --lightstrip`, (err, stdout, stderr) => {
                         if(err) {
+                            this.log.info(this.name + " - Error getting characteristic 'On'");
                             this.debugLog("GetPower - Error - " + this.name + ": " + stderr.trim());
                         } else {
                             stdout = stdout.split("\n")[2].trim();
@@ -118,7 +123,10 @@ class KasaLightstripPlugin {
             .onSet(async (state) => {
                 this.debugLog(`SetBrightness: 'kasa --host ${this.ip} --lightstrip brightness ${state}'`);
                 exec(`kasa --host ${this.ip} --lightstrip brightness ${state}`, (err, stdout, stderr) => {
-                    if(err) this.debugLog("SetBrightness - Error - " + this.name + ": " + stderr.trim());
+                    if(err) {
+                        this.log.info(this.name + " - Error setting characteristic 'Brightness'");
+                        this.debugLog("SetBrightness - Error - " + this.name + ": " + stderr.trim());
+                    }
                     this.brightness = state;
                 });
             }).onGet(async () => {
@@ -127,6 +135,7 @@ class KasaLightstripPlugin {
                     this.debugLog(`GetBrightness: 'kasa --host ${this.ip} --lightstrip brightness'`);
                     exec(`kasa --host ${this.ip} --lightstrip brightness`, (err, stdout, stderr) => {
                         if(err) {
+                            this.log.info(this.name + " - Error getting characteristic 'Brightness'");
                             this.debugLog("GetBrightness - Error - " + stderr.trim());
                         } else {
                             stdout = stdout.split("\n")[0].trim();
@@ -151,6 +160,7 @@ class KasaLightstripPlugin {
                     this.debugLog(`GetHue: 'kasa --host ${this.ip} --lightstrip hsv'`);
                     exec(`kasa --host ${this.ip} --lightstrip hsv`, (err, stdout, stderr) => {
                         if(err) {
+                            this.log.info(this.name + " - Error getting characteristic 'Hue/Saturation'");
                             this.debugLog("GetHue - Error - " + this.name + ": " + stderr.trim());
                         } else {
                             stdout = stdout.split("\n")[0].trim();
@@ -182,7 +192,10 @@ class KasaLightstripPlugin {
             let saturation = this.tempSaturation;
             this.debugLog(`SetColor: 'kasa --host ${this.ip} --lightstrip hsv ${hue} ${saturation} ${this.brightness}'`);
             exec(`kasa --host ${this.ip} --lightstrip hsv ${hue} ${saturation} ${this.brightness}`, (err, stdout, stderr) => {
-                if(err) this.debugLog("SetColor - Error - " + this.name + ": " + stderr.trim());
+                if(err) {
+                    this.log.info(this.name + " - Error setting characteristic 'Hue/Saturation'");
+                    this.debugLog("SetColor - Error - " + this.name + ": " + stderr.trim());
+                }
                 this.hue = hue;
                 this.saturation = saturation;
                 if(this.onStatus == false) {

@@ -80,6 +80,6 @@ platforms: [
   * **ip** (mandatory): the IP address of the device
 * *debug* (optional): boolean to enable more verbose logging
 
-## Errors in Debug Logs
+## Errors
 
-If you have enabled debug logging, erorrs like `ConnectionResetError: [Errno 104] Connection reset by peer` are common due to the nature of the implementation:  Flooding your devices with rapid `python-kasa` calls may result in several dropped connections!
+Erorrs like `ConnectionResetError: [Errno 104] Connection reset by peer` seem to be common due to the nature of the implementation:  Flooding your devices with rapid `python-kasa` calls may result in several dropped connections.
