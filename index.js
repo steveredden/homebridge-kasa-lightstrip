@@ -78,7 +78,7 @@ class KasaLightstripPlugin {
         this.deviceService = this.device.getService(Service.Lightbulb) || this.device.addService(Service.Lightbulb);
 
         this.log.info(this.name, `- Initialized`);
-        this.debugLog(this.name + " uuid: [" + this.device.UUID + "]")
+        this.debugLog(this.name + " uuid: [" + this.device.UUID + "]");
         
         this.updateAllCharacteristics();
     }
@@ -95,7 +95,7 @@ class KasaLightstripPlugin {
                         this.log.info(this.name, " - Error setting characteristic 'On'");
                         this.debugLog("SetPower - Error - " + stderr.trim());
                     }
-                    this.deviceService.updateCharacteristic(Characteristic.On, state);
+                    this.onStatus = state;
                 });
             }).onGet(async () => {
                 if(!this.checkingOn) {
@@ -106,9 +106,10 @@ class KasaLightstripPlugin {
                             this.onStatus = false;
                             this.debugLog("GetPower - Error - " + stderr.trim());
                         } else {
-                            stdout = stdout.split("\n");
-                            this.debugLog(stdout[2].trim());
-                            this.onStatus = stdout[2].includes("Device state: ON");
+                            stdout = stdout.split("\n")[2].trim();
+                            this.debugLog(stdout);
+                            this.onStatus = stdout.includes("Device state: ON");
+                            this.deviceService.updateCharacteristic(Characteristic.On, this.onStatus);   //keep in sync in case the light was turned on elsewhere
                         }
                         this.checkingOn = false;
                     });
@@ -125,7 +126,7 @@ class KasaLightstripPlugin {
                         this.log.info(this.name, " - Error setting characteristic 'Brightness'");
                         this.debugLog("handleBrightness - Error - " + stderr.trim());
                     }
-                    this.deviceService.updateCharacteristic(Characteristic.Brightness, state);
+                    this.brightness = state;
                 });
             }).onGet(async () => {
                 if(!this.checkingBrightness) {
@@ -136,9 +137,9 @@ class KasaLightstripPlugin {
                             this.brightness = 100;
                             this.debugLog("GetBrightness - Error - " + stderr.trim());
                         } else {
-                            stdout = stdout.split("\n");
-                            this.debugLog(stdout[0].trim());
-                            this.brightness = stdout[0].split("Brightness: ")[1];
+                            stdout = stdout.split("\n")[0].trim();
+                            this.debugLog(stdout);
+                            this.brightness = stdout.split("Brightness: ")[1];
                         }
                         this.checkingBrightness = false;
                     });
@@ -161,15 +162,14 @@ class KasaLightstripPlugin {
                             this.hue = 0;
                             this.debugLog("GetHue - Error - " + stderr.trim());
                         } else {
-                            stdout = stdout.split("\n");
-                            this.debugLog(stdout[0].trim());  //expects "Current HSV: ($h, $s, $b)"
-                            this.hue = (stdout[0].split("(")[1]).split(",")[0].trim();
-                            this.saturation = (stdout[0].split("(")[1]).split(",")[1].trim();
+                            stdout = stdout.split("\n")[0].trim();
+                            this.debugLog(stdout);  //expects "Current HSV: ($h, $s, $b)"
+                            this.hue = (stdout.split("(")[1]).split(",")[0].trim();
+                            this.saturation = (stdout.split("(")[1]).split(",")[1].trim();
                         }
                         this.checkingHSV = false;
                     });
                 }
-                this.deviceService.updateCharacteristic(Characteristic.Saturation, this.saturation);
                 return this.hue;
             });
         
@@ -196,8 +196,9 @@ class KasaLightstripPlugin {
                     this.log.info(this.name, " - Error setting characteristic 'Hue/Saturation'");
                     this.debugLog("SetColor - Error - " + stderr.trim());
                 }
-                this.deviceService.updateCharacteristic(Characteristic.Hue, hue);
-                this.deviceService.updateCharacteristic(Characteristic.Saturation, saturation);
+                this.hue = hue;
+                this.saturation = saturation;
+                if(this.onStatus === false) this.deviceService.updateCharacteristic(Characteristic.On, true);    //can't change the color without turning on the light (not sure if that's a kasa thing or a python-kasa thing)
             });
             this.tempHue = undefined;
             this.tempSaturation = undefined;
