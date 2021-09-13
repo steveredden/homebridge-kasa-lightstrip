@@ -175,9 +175,9 @@ class KasaLightstripPlugin {
         
         //Saturation = int
         this.deviceService.getCharacteristic(Characteristic.Saturation)
-            .onSet(async (state) => { 
+            .onSet(async (state) => {
+                //wait for .Hue handle updating the characteristic
                 this.tempSaturation = state;
-                //let .Hue handle updating the characteristic
             }).onGet(async () => {
                 //do nothing; let .Hue handle the value
                 return this.saturation;
