@@ -72,14 +72,13 @@ class KasaLightstripPlugin {
         this.device.category = this.api.hap.Categories.LIGHTBULB;
         this.deviceService = this.device.addService(Service.Lightbulb);
         this.deviceService.setCharacteristic(Characteristic.ConfiguredName, this.name);
-        this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [this.device]);
-
-        this.log.info(this.name, `- Created`);
-
         this.updateAllCharacteristics();
+
+        this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [this.device]);
+        this.log.info(this.name, `- Created`);
     }
 
-    async updateAllCharacteristics() {
+    updateAllCharacteristics() {
 
         //On = boolean
         this.deviceService.getCharacteristic(Characteristic.On)
