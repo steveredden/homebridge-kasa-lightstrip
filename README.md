@@ -19,12 +19,20 @@ This plugin is a stop-gap to provide integration of Kasa's light strips, while t
 
 The [python-kasa](https://github.com/python-kasa/python-kasa) library is required for this plugin.  Credit to that team and the maintainers!
 
-Instructions for [Homebridge Raspberry Pi Image](https://github.com/homebridge/homebridge-raspbian-image/wiki/Getting-Started):
+Installation instructions for [Homebridge Raspberry Pi Image](https://github.com/homebridge/homebridge-raspbian-image/wiki/Getting-Started):
 
 ```sh
 sudo apt install python3-pip
 sudo pip3 install python-kasa --pre
 ```
+
+#### Validation
+
+You can validate that the `python-kasa` library is installed by executing `kasa --help` at the command line of your environment:
+
+![kasa --help output](img/validatePython-kasa.png)
+
+You should see something similar the above output.  If you do not, and you see something like `-bash: kasa: command not found` you will need to install it (as seen above), or find a way to get it into your environment.  Reviewing the [python-kasa repo](https://github.com/python-kasa/python-kasa#readme) for additional instructions.
 
 ## Installation Instructions
 
@@ -75,3 +83,4 @@ platforms: [
 ## Errors in Debug Logs
 
 If you have enabled debug logging, erorrs like `ConnectionResetError: [Errno 104] Connection reset by peer` are common due to the nature of the implementation:  Flooding your devices with rapid `python-kasa` calls may result in several dropped connections!
+
