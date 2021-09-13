@@ -13,7 +13,7 @@
 
 `homebridge-kasa-lightstrip` is a [Homebridge](https://homebridge.io) plugin that exposes tp-link kasa light strip devices to [Apple's](https://www.apple.com) [HomeKit](https://www.apple.com/ios/home) smart home platform.
 
-This plugin is a stop-gap to provide integration of Kasa's light strips, while the [far superior] plugin ([homebridge-tplink-smarthome](https://github.com/plasticrake/homebridge-tplink-smarthome#readme)) lacks support!
+This plugin was developed as a stop-gap to provide integration of Kasa's light strips, while the [far superior] plugin ([homebridge-tplink-smarthome](https://github.com/plasticrake/homebridge-tplink-smarthome#readme)) lacks support!
 
 ## Prerequisites
 
@@ -36,11 +36,11 @@ You should see something similar the above output.  If you do not, and you see s
 
 ## Installation Instructions
 
-#### Option 1: Install via Homebridge Config UI X:
+#### Option 1: Install via Homebridge Config UI X
 
 Search for "kasa" in [homebridge-config-ui-x](https://github.com/oznu/homebridge-config-ui-x) and install `homebridge-kasa-lightstrip`.
 
-#### Option 2: Manually Install:
+#### Option 2: Manually Install
 
 ```sh
 sudo npm install -g homebridge-kasa-lightstrip
@@ -80,6 +80,15 @@ platforms: [
   * **ip** (mandatory): the IP address of the device
 * *debug* (optional): boolean to enable more verbose logging
 
-## Errors
+## Characteristic Errors
 
-Erorrs like `ConnectionResetError: [Errno 104] Connection reset by peer` seem to be common due to the nature of the implementation:  Flooding your devices with rapid `python-kasa` calls may result in several dropped connections.
+Erorrs may common due to the nature of the implementation:  Flooding your devices with rapid `python-kasa` calls may result in several dropped connections.
+
+It is most often seen with the Brightness slider -> as you slide, the Home app can send numerous Brightness values, resulting in numerous `kasa` executions.  You'll see the following displayed in the log:
+
+```sh
+[homebridge-kasa-lightstrip] StripName - Error setting characteristic 'Brightness'
+```
+
+Attempt to slow your inputs! :man_shrugging:
+
