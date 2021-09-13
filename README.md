@@ -1,10 +1,7 @@
 <p align="center">
-
-<img src="https://github.com/homebridge/branding/raw/master/logos/homebridge-wordmark-logo-vertical.png" width="150">
-
+    <img src="https://github.com/homebridge/branding/raw/master/logos/homebridge-wordmark-logo-vertical.png" width="150">
 </p>
 
-[![GitHub All Releases](https://img.shields.io/github/downloads/steveredden/homebridge-kasa-lightstrip/total)]()
 # homebridge-kasa-lightstrip
 
 `homebridge-kasa-lightstrip` is a [Homebridge](https://homebridge.io) plugin that exposes tp-link kasa light strip devices to [Apple's](https://www.apple.com) [HomeKit](https://www.apple.com/ios/home) smart home platform.
@@ -68,4 +65,4 @@ platforms: [
 
 ## Errors
 
-Errors are expected due to the nature of the implementation:  Flooding your devices with python-kasa calls will result in several dropped connections.  Just try to move the "Brightness" meter more quickly so it only attempts to set one value, etc!
+Errors are expected due to the nature of the implementation:  Flooding your devices with `python-kasa` calls will result in several dropped connections.  Just try to move the "Brightness" meter more quickly so it only attempts to set one value, etc!
