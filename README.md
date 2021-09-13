@@ -90,4 +90,4 @@ It is most often seen with the Brightness slider -> as you slide, the Home app c
 [homebridge-kasa-lightstrip] StripName - Error setting characteristic 'Brightness'
 ```
 
-Attempt to slow your inputs! :man_shrugging:
+Attempt to slow your inputs! :thinking:  Or speed your swipe?! :man_shrugging:
