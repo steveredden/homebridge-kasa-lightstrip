@@ -12,7 +12,7 @@ This plugin is a stop-gap to provide integration of Kasa's light strips, while t
 
 The [python-kasa](https://github.com/python-kasa/python-kasa) library is required for this plugin.  Credit to that team and the maintainers!
 
-Homebridge Raspberry Pi Image:
+Instructions for [Homebridge Raspberry Pi Image](https://github.com/homebridge/homebridge-raspbian-image/wiki/Getting-Started):
 
 ```sh
 sudo apt install python3-pip
@@ -33,9 +33,10 @@ sudo npm install -g homebridge-kasa-lightstrip
 
 ## Supported Devices
 
-### Light Strips
+### Kasa Light Strips
 
 * [KL400L5](https://www.kasasmart.com/us/products/smart-lighting/product-kl400l5)
+* *pending* [KL430](https://www.kasasmart.com/us/products/smart-lighting/kasa-smart-led-light-strip-kl430)
 
 ## Configuration
 
