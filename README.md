@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/homebridge/branding/raw/master/logos/homebridge-wordmark-logo-vertical.png" width="150">
+    <a href="https://homebridge.io/"><img src="https://github.com/homebridge/branding/raw/master/logos/homebridge-wordmark-logo-vertical.png" width="190"/></a>
 </p>
 
 [![GitHub license](https://badgen.net/github/license/steveredden/homebridge-kasa-lightstrip)](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/main/LICENSE)
@@ -7,7 +7,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/steveredden/homebridge-kasa-lightstrip.svg)](https://GitHub.com/steveredden/homebridge-kasa-lightstrip/issues/)
 [![Npm package version](https://badgen.net/npm/v/homebridge-kasa-lightstrip)](https://npmjs.com/package/homebridge-kasa-lightstrip)
 [![Npm package total downloads](https://badgen.net/npm/dt/homebridge-kasa-lightstrip)](https://www.npmjs.com/package/homebridge-kasa-lightstrip)
-
 
 # homebridge-kasa-lightstrip
 
@@ -91,3 +90,7 @@ It is most often seen with the Brightness slider -> as you slide, the Home app c
 ```
 
 Attempt to slow your inputs! :thinking:  Or speed your swipe?! :man_shrugging:
+<hr>
+<p align="center">
+    <a href="https://buymeacoffee.com/steveredden"><img src="img/bmc-new-logo.png" width="190"/></a>
+</p>
