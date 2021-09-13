@@ -51,7 +51,7 @@ sudo npm install -g homebridge-kasa-lightstrip
 ### Kasa Light Strips
 
 * [KL400L5](https://www.kasasmart.com/us/products/smart-lighting/product-kl400l5)
-* *pending* [KL430](https://www.kasasmart.com/us/products/smart-lighting/kasa-smart-led-light-strip-kl430)
+* [KL430](https://www.kasasmart.com/us/products/smart-lighting/kasa-smart-led-light-strip-kl430)
 
 ## Configuration
 
