@@ -91,4 +91,3 @@ It is most often seen with the Brightness slider -> as you slide, the Home app c
 ```
 
 Attempt to slow your inputs! :man_shrugging:
-
