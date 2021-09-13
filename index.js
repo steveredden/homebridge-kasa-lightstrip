@@ -91,10 +91,7 @@ class KasaLightstripPlugin {
                 var translatedState = (state == true) ? "on":"off";
                 this.debugLog(`SetPower: 'kasa --host ${this.ip} --lightstrip ${translatedState}'`);
                 exec(`kasa --host ${this.ip} --lightstrip ${translatedState}`, (err, stdout, stderr) => {
-                    if(err) {
-                        this.log.info(this.name, " - Error setting characteristic 'On'");
-                        this.debugLog("SetPower - Error - " + stderr.trim());
-                    }
+                    if(err) this.debugLog("SetPower - Error - " + this.name + ": " + stderr.trim());
                     this.onStatus = state;
                 });
             }).onGet(async () => {
@@ -103,8 +100,7 @@ class KasaLightstripPlugin {
                     this.debugLog(`GetPower: 'kasa --host ${this.ip} --lightstrip'`);
                     exec(`kasa --host ${this.ip} --lightstrip`, (err, stdout, stderr) => {
                         if(err) {
-                            this.onStatus = false;
-                            this.debugLog("GetPower - Error - " + stderr.trim());
+                            this.debugLog("GetPower - Error - " + this.name + ": " + stderr.trim());
                         } else {
                             stdout = stdout.split("\n")[2].trim();
                             this.debugLog(stdout);
@@ -122,10 +118,7 @@ class KasaLightstripPlugin {
             .onSet(async (state) => {
                 this.debugLog(`SetBrightness: 'kasa --host ${this.ip} --lightstrip brightness ${state}'`);
                 exec(`kasa --host ${this.ip} --lightstrip brightness ${state}`, (err, stdout, stderr) => {
-                    if(err) {
-                        this.log.info(this.name, " - Error setting characteristic 'Brightness'");
-                        this.debugLog("handleBrightness - Error - " + stderr.trim());
-                    }
+                    if(err) this.debugLog("SetBrightness - Error - " + this.name + ": " + stderr.trim());
                     this.brightness = state;
                 });
             }).onGet(async () => {
@@ -134,7 +127,6 @@ class KasaLightstripPlugin {
                     this.debugLog(`GetBrightness: 'kasa --host ${this.ip} --lightstrip brightness'`);
                     exec(`kasa --host ${this.ip} --lightstrip brightness`, (err, stdout, stderr) => {
                         if(err) {
-                            this.brightness = 100;
                             this.debugLog("GetBrightness - Error - " + stderr.trim());
                         } else {
                             stdout = stdout.split("\n")[0].trim();
@@ -159,8 +151,7 @@ class KasaLightstripPlugin {
                     this.debugLog(`GetHue: 'kasa --host ${this.ip} --lightstrip hsv'`);
                     exec(`kasa --host ${this.ip} --lightstrip hsv`, (err, stdout, stderr) => {
                         if(err) {
-                            this.hue = 0;
-                            this.debugLog("GetHue - Error - " + stderr.trim());
+                            this.debugLog("GetHue - Error - " + this.name + ": " + stderr.trim());
                         } else {
                             stdout = stdout.split("\n")[0].trim();
                             this.debugLog(stdout);  //expects "Current HSV: ($h, $s, $b)"
@@ -179,7 +170,6 @@ class KasaLightstripPlugin {
                 //wait for .Hue handle updating the characteristic
                 this.tempSaturation = state;
             }).onGet(async () => {
-                //do nothing; let .Hue handle the value
                 return this.saturation;
             });
     }
@@ -192,10 +182,7 @@ class KasaLightstripPlugin {
             let saturation = this.tempSaturation;
             this.debugLog(`SetColor: 'kasa --host ${this.ip} --lightstrip hsv ${hue} ${saturation} ${this.brightness}'`);
             exec(`kasa --host ${this.ip} --lightstrip hsv ${hue} ${saturation} ${this.brightness}`, (err, stdout, stderr) => {
-                if(err) {
-                    this.log.info(this.name, " - Error setting characteristic 'Hue/Saturation'");
-                    this.debugLog("SetColor - Error - " + stderr.trim());
-                }
+                if(err) this.debugLog("SetColor - Error - " + this.name + ": " + stderr.trim());
                 this.hue = hue;
                 this.saturation = saturation;
                 if(this.onStatus === false) this.deviceService.updateCharacteristic(Characteristic.On, true);    //can't change the color without turning on the light (not sure if that's a kasa thing or a python-kasa thing)
