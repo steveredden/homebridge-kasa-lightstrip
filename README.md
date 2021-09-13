@@ -32,7 +32,7 @@ You can validate that the `python-kasa` library is installed by executing `kasa 
 
 ![kasa --help output](img/validatePython-kasa.png)
 
-You should see something similar the above output.  If you do not, and you see something like `-bash: kasa: command not found`, you will need to install it (as seen above), or find a way to get it into your environment.  Review the [python-kasa](https://github.com/python-kasa/python-kasa#readme) repository for any additional instructions.
+You should see something similar the above output.  If you do not, and you see something like `-bash: kasa: command not found`, you will need to install it (instructions above), or find a way to get it into your environment.  Review the [python-kasa](https://github.com/python-kasa/python-kasa#readme) repository for any additional instructions.
 
 ## Installation Instructions
 
