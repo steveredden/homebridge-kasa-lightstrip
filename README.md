@@ -17,7 +17,7 @@ This plugin is a stop-gap to provide integration of Kasa's light strips, while t
 
 ## Prerequisites
 
-The [python-kasa](https://github.com/python-kasa/python-kasa) library is required for this plugin.  Credit to that team and the maintainers!
+The [python-kasa](https://github.com/python-kasa/python-kasa) library is required for this plugin.  Credit to that team and the maintainers! :trophy::clap:
 
 Installation instructions for [Homebridge Raspberry Pi Image](https://github.com/homebridge/homebridge-raspbian-image/wiki/Getting-Started):
 
@@ -32,7 +32,7 @@ You can validate that the `python-kasa` library is installed by executing `kasa 
 
 ![kasa --help output](img/validatePython-kasa.png)
 
-You should see something similar the above output.  If you do not, and you see something like `-bash: kasa: command not found` you will need to install it (as seen above), or find a way to get it into your environment.  Review the [python-kasa repo](https://github.com/python-kasa/python-kasa#readme) for additional instructions.
+You should see something similar the above output.  If you do not, and you see something like `-bash: kasa: command not found`, you will need to install it (as seen above), or find a way to get it into your environment.  Review the [python-kasa](https://github.com/python-kasa/python-kasa#readme) repository for any additional instructions.
 
 ## Installation Instructions
 
