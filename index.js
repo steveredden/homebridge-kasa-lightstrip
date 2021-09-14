@@ -3,7 +3,6 @@ let Service, Characteristic;
 
 const PLUGIN_NAME = 'homebridge-kasa-lightstrip';
 const PLATFORM_NAME = 'HomebridgeKasaLightstrip';
-//const LIGHT_EFFECTS = require('./lib/light-effects/_All_Effects.js'
 
 module.exports = (api) => {
     Service = api.hap.Service;
