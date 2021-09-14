@@ -14,6 +14,8 @@
 
 This plugin was developed as a stop-gap to provide integration of Kasa's light strips, while the [far superior] plugin ([homebridge-tplink-smarthome](https://github.com/plasticrake/homebridge-tplink-smarthome#readme)) lacks support!
 
+This plugin creates Lightbulb accessories for you to integrate with your lightstrips.  It can also, optionally, create stateless Switch accessories to enable Light Effects.
+
 ## Prerequisites
 
 The [python-kasa](https://github.com/python-kasa/python-kasa) library is required for this plugin.  Credit to that team and the maintainers! :trophy::clap:
@@ -66,7 +68,17 @@ platforms: [
         "accessories": [
             {
                 "name": "Couch Strip",
-                "ip": "10.10.10.10"
+                "ip": "10.10.10.10",
+                "effects": {
+                    "aurora": true,
+                    "hanukkah": true,
+                    "CustomEffects": [
+                        {
+                            "name": "MyCustomEffect1",
+                            "json": "{'custom':1,'id':'xqUxDhbAhNLqulcuRMyPBmVGyTOyEMEu','brightness':100,'name':'MyCustomEffect1','segments':[0],'expansion_strategy':1,'enable':1,'type':'sequence','duration':0,'transition':1500,'direction':4,'spread':7,'repeat_times':0,'sequence':[[120,100,100],[240,100,100],[260,100,100],[280,100,100]]}"
+                        }
+                    ]
+                }
             }
         ],
         "debug": false
@@ -79,6 +91,11 @@ platforms: [
 * **accessories** (mandatory): array containing the devices and their info:
   * **name** (mandatory): the name of the accessory to create
   * **ip** (mandatory): the IP address of the device
+  * *effects* (optional): array containing any effects to create:
+    * *\<effectName\>* (optional): boolean to enable a specific built-in effect
+    * *CustomEffects* (optional): array containing any custom effects to create:
+      * *name* (optional): the name of the custom effect
+      * *json* (optional): the json for the custom effect (see [CustomLightingEffects.md](CustomLightingEffects.md) for more information)
 * *debug* (optional): boolean to enable more verbose logging
 
 ## Characteristic Errors
@@ -92,7 +109,7 @@ It is most often seen with the Brightness slider -> as you slide, the Home app c
 ```
 
 Attempt to slow your inputs! :thinking:  Or speed your swipe?! :man_shrugging:
-<hr>
+<br><hr><br>
 <p align="center">
-    <a href="https://buymeacoffee.com/steveredden"><img src="img/bmc-new-logo.png" width="190"/></a>
+    <a href="https://buymeacoffee.com/steveredden"><img src="img/bmc-new-logo.png" width="230"/></a>
 </p>
