@@ -1,0 +1,37 @@
+{
+    "custom": 0,
+    "id": "bCTItKETDFfrKANolgldxfgOakaarARs",
+    "brightness": 100,
+    "name": "Flicker",
+    "segments": [
+        1
+    ],
+    "expansion_strategy": 1,
+    "enable": 1,
+    "type": "random",
+    "hue_range": [
+        30,
+        40
+    ],
+    "saturation_range": [
+        100,
+        100
+    ],
+    "brightness_range": [
+        50,
+        100
+    ],
+    "duration": 0,
+    "transition": 0,
+    "transition_range": [
+        375,
+        500
+    ],
+    "init_states": [
+        [
+            30,
+            81,
+            80
+        ]
+    ]
+}

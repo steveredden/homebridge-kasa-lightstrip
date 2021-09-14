@@ -1,0 +1,37 @@
+{
+    "custom": 0,
+    "id": "CdLeIgiKcQrLKMINRPTMbylATulQewLD",
+    "brightness": 100,
+    "name": "Hanukkah",
+    "segments": [
+        1
+    ],
+    "expansion_strategy": 1,
+    "enable": 1,
+    "type": "random",
+    "hue_range": [
+        200,
+        210
+    ],
+    "saturation_range": [
+        0,
+        100
+    ],
+    "brightness_range": [
+        50,
+        100
+    ],
+    "duration": 1500,
+    "transition": 0,
+    "transition_range": [
+        400,
+        500
+    ],
+    "init_states": [
+        [
+            35,
+            81,
+            80
+        ]
+    ]
+}

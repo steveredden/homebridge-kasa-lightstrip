@@ -1,0 +1,42 @@
+{
+    "custom": 0,
+    "id": "QbDFwiSFmLzQenUOPnJrsGqyIVrJrRsl",
+    "brightness": 30,
+    "name": "Raindrop",
+    "segments": [
+        0
+    ],
+    "expansion_strategy": 1,
+    "enable": 1,
+    "type": "random",
+    "hue_range": [
+        200,
+        200
+    ],
+    "saturation_range": [
+        10,
+        20
+    ],
+    "brightness_range": [
+        10,
+        30
+    ],
+    "duration": 0,
+    "transition": 1000,
+    "init_states": [
+        [
+            200,
+            40,
+            100
+        ]
+    ],
+    "fadeoff": 1000,
+    "random_seed": 24,
+    "backgrounds": [
+        [
+            200,
+            40,
+            0
+        ]
+    ]
+}

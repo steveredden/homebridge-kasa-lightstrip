@@ -62,6 +62,7 @@ Device names and IP Addresses must be configured manually in current state:
 platforms: [
     {
         "platform": "HomebridgeKasaLightstrip",
+        "name": "KasaLightstrip",
         "accessories": [
             {
                 "name": "Couch Strip",
@@ -73,8 +74,9 @@ platforms: [
 ]
 ```
 
-* **platform** (mandatory): the name of this plugin
-* **accessories** (mandatory):  array containing the devices and their info:
+* **platform** (mandatory): the name of this
+* *name* (optional): platform name to display in logs
+* **accessories** (mandatory): array containing the devices and their info:
   * **name** (mandatory): the name of the accessory to create
   * **ip** (mandatory): the IP address of the device
 * *debug* (optional): boolean to enable more verbose logging
