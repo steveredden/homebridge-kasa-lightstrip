@@ -1,48 +1,283 @@
 {
-  "pluginAlias": "HomebridgeKasaLightstrip",
-  "pluginType": "platform",
-  "singular": true,
-  "headerDisplay": "Plugin to utilize [python-kasa](https://github.com/python-kasa/python-kasa) to control Kasa Lightstrips",
-  "footerDisplay": "For more information, see the [README](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/master/README.md)",
-  "schema": {
-    "type": "object",
-    "properties": {
-      "name": {
-        "type": "string",
-        "default": "KasaLightstrip",
-        "condition": {
-          "functionBody": "return false;"
-        }
-      },
-      "debug": {
-        "title": "Enable debug logs",
-        "type": "boolean",
-	      "default": ""
-      },
-      "accessories": {
-        "title": "Light Strip Accessories",
-        "type": "array",
-        "required": true,
-        "items": {
-          "type": "object",
-          "properties": {
+    "pluginAlias": "HomebridgeKasaLightstrip",
+    "pluginType": "platform",
+    "singular": true,
+    "headerDisplay": "Plugin to utilize [python-kasa](https://github.com/python-kasa/python-kasa) to control Kasa Lightstrips",
+    "footerDisplay": "For more information, see the [README.md](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/main/README.md)<p>For Custom Lighting Effect instructions see the [CustomLightingEffects.md](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/main/CustomLightingEffects.md)",
+    "schema": {
+        "type": "object",
+        "properties": {
             "name": {
-              "title": "Device Name",
-              "placeholder": "Type your device name",
-              "type": "string",
-              "minLength": 1,
-              "required": true
+                "type": "string",
+                "default": "KasaLightstrip",
+                "description": "The name that will appear in your homebridge log"
             },
-            "ip": {
-              "title": "Device IP",
-              "placeholder": "Type your device IP address",
-              "type": "string",
-              "format": "ipv4",
-              "required": true
+            "debug": {
+                "title": "Enable debug logs",
+                "type": "boolean",
+                "default": ""
+            },
+            "accessories": {
+                "title": "Light Strip Accessories",
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "title": "Device Name",
+                            "placeholder": "Type your device name",
+                            "type": "string",
+                            "minLength": 1,
+                            "required": true
+                        },
+                        "ip": {
+                            "title": "Device IP",
+                            "placeholder": "Type your device IP address",
+                            "type": "string",
+                            "format": "ipv4",
+                            "required": true
+                        },
+                        "effects": {
+                            "type": "object",
+                            "properties": {
+                                "aurora": {
+                                    "title": "Aurora",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "bubblingcauldron": {
+                                    "title": "Bubbling Cauldron",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "candycane": {
+                                    "title": "Candy Cane",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "christmas": {
+                                    "title": "Christmas",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "flicker": {
+                                    "title": "Flicker",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "hanukkah": {
+                                    "title": "Hanukkah",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "hauntedmansion": {
+                                    "title": "Haunted Mansion",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "icicle": {
+                                    "title": "Icicle",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "lightning": {
+                                    "title": "Lightning",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "ocean": {
+                                    "title": "Ocean",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "rainbow": {
+                                    "title": "Rainbow",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "raindrop": {
+                                    "title": "Raindrop",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "spring": {
+                                    "title": "Spring",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "valentines": {
+                                    "title": "Valentines",
+                                    "type": "boolean",
+                                    "default": ""
+                                },
+                                "CustomEffects": {
+                                    "type": "array",
+                                    "title": "Custom Lighting Effects",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "title": "Custom Effect Name",
+                                                "type": "string",
+                                                "placeholder": "Type your effect name"
+                                            },
+                                            "json": {
+                                                "title": "Custom Effect JSON *",
+                                                "type": "string",
+                                                "placeholder": "{'custom':0,'id':SoMeStRiNg','brightness':100,'enable':1,'direction':... etc ...}",
+                                                "description": "* requires custom format - see footer for CustomLightingEffects.md"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  }
+    },
+    "layout": [
+        {
+            "items": [
+                {
+                    "key": "name"
+                }
+            ]
+        },
+        {
+            "items": [
+                {
+                    "key": "debug"
+                }
+            ]
+        },
+        {
+            "items": [
+                {
+                    "key": "accessories",
+                    "items": [
+                        {
+                            "key": "accessories[].name"
+                        },
+                        {
+                            "key": "accessories[].ip"
+                        },
+                        {
+                            "key": "accessories[].effects",
+                            "title": "Create additional Switch accessories for the following lighting effects:",
+                            "expandable": true,
+                            "items": [
+                                {
+                                    "type": "flex",
+                                    "displayFlex": true,
+                                    "flex-direction": "row",
+                                    "items": [
+                                        {
+                                            "key": "accessories[].effects.aurora",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.bubblingcauldron",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.candycane",
+                                            "flex": "1 1 100px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "flex",
+                                    "displayFlex": true,
+                                    "flex-direction": "row",
+                                    "items": [
+                                        {
+                                            "key": "accessories[].effects.christmas",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.flicker",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.hanukkah"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "flex",
+                                    "displayFlex": true,
+                                    "flex-direction": "row",
+                                    "items": [
+                                        {
+                                            "key": "accessories[].effects.hauntedmansion",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.icicle",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.lightning",
+                                            "flex": "1 1 100px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "flex",
+                                    "displayFlex": true,
+                                    "flex-direction": "row",
+                                    "items": [
+                                        {
+                                            "key": "accessories[].effects.ocean",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.rainbow",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.raindrop",
+                                            "flex": "1 1 100px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "flex",
+                                    "displayFlex": true,
+                                    "flex-direction": "row",
+                                    "items": [
+                                        {
+                                            "key": "accessories[].effects.spring",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.valentines",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "flex": "1 1 100px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "key": "accessories[].effects.CustomEffects",
+                                    "items": [
+                                        {
+                                            "key": "accessories[].effects.CustomEffects[].name"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.CustomEffects[].json"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }
