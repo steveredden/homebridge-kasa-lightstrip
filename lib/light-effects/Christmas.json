@@ -1,0 +1,57 @@
+{
+    "custom": 0,
+    "id": "bwTatyinOUajKrDwzMmqxxJdnInQUgvM",
+    "brightness": 100,
+    "name": "Christmas",
+    "segments": [
+        0
+    ],
+    "expansion_strategy": 1,
+    "enable": 1,
+    "type": "random",
+    "hue_range": [
+        136,
+        146
+    ],
+    "saturation_range": [
+        90,
+        100
+    ],
+    "brightness_range": [
+        50,
+        100
+    ],
+    "duration": 5000,
+    "transition": 0,
+    "init_states": [
+        [
+            136,
+            0,
+            100
+        ]
+    ],
+    "fadeoff": 2000,
+    "random_seed": 100,
+    "backgrounds": [
+        [
+            136,
+            98,
+            75
+        ],
+        [
+            136,
+            0,
+            0
+        ],
+        [
+            350,
+            0,
+            100
+        ],
+        [
+            350,
+            97,
+            94
+        ]
+    ]
+}
