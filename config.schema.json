@@ -41,72 +41,72 @@
                         "effects": {
                             "type": "object",
                             "properties": {
-                                "aurora": {
+                                "Aurora": {
                                     "title": "Aurora",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "bubblingcauldron": {
+                                "BubblingCauldron": {
                                     "title": "Bubbling Cauldron",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "candycane": {
+                                "Candycane": {
                                     "title": "Candy Cane",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "christmas": {
+                                "Christmas": {
                                     "title": "Christmas",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "flicker": {
+                                "Flicker": {
                                     "title": "Flicker",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "hanukkah": {
+                                "Hanukkah": {
                                     "title": "Hanukkah",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "hauntedmansion": {
+                                "HauntedMansion": {
                                     "title": "Haunted Mansion",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "icicle": {
+                                "Icicle": {
                                     "title": "Icicle",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "lightning": {
+                                "Lightning": {
                                     "title": "Lightning",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "ocean": {
+                                "Ocean": {
                                     "title": "Ocean",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "rainbow": {
+                                "Rainbow": {
                                     "title": "Rainbow",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "raindrop": {
+                                "Raindrop": {
                                     "title": "Raindrop",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "spring": {
+                                "Spring": {
                                     "title": "Spring",
                                     "type": "boolean",
                                     "default": ""
                                 },
-                                "valentines": {
+                                "Valentines": {
                                     "title": "Valentines",
                                     "type": "boolean",
                                     "default": ""
@@ -175,15 +175,15 @@
                                     "flex-direction": "row",
                                     "items": [
                                         {
-                                            "key": "accessories[].effects.aurora",
+                                            "key": "accessories[].effects.Aurora",
                                             "flex": "1 1 100px"
                                         },
                                         {
-                                            "key": "accessories[].effects.bubblingcauldron",
+                                            "key": "accessories[].effects.BubblingCauldron",
                                             "flex": "1 1 100px"
                                         },
                                         {
-                                            "key": "accessories[].effects.candycane",
+                                            "key": "accessories[].effects.Candycane",
                                             "flex": "1 1 100px"
                                         }
                                     ]
@@ -194,15 +194,15 @@
                                     "flex-direction": "row",
                                     "items": [
                                         {
-                                            "key": "accessories[].effects.christmas",
+                                            "key": "accessories[].effects.Christmas",
                                             "flex": "1 1 100px"
                                         },
                                         {
-                                            "key": "accessories[].effects.flicker",
+                                            "key": "accessories[].effects.Flicker",
                                             "flex": "1 1 100px"
                                         },
                                         {
-                                            "key": "accessories[].effects.hanukkah"
+                                            "key": "accessories[].effects.Hanukkah"
                                         }
                                     ]
                                 },
@@ -212,34 +212,15 @@
                                     "flex-direction": "row",
                                     "items": [
                                         {
-                                            "key": "accessories[].effects.hauntedmansion",
+                                            "key": "accessories[].effects.HauntedMansion",
                                             "flex": "1 1 100px"
                                         },
                                         {
-                                            "key": "accessories[].effects.icicle",
+                                            "key": "accessories[].effects.Icicle",
                                             "flex": "1 1 100px"
                                         },
                                         {
-                                            "key": "accessories[].effects.lightning",
-                                            "flex": "1 1 100px"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "flex",
-                                    "displayFlex": true,
-                                    "flex-direction": "row",
-                                    "items": [
-                                        {
-                                            "key": "accessories[].effects.ocean",
-                                            "flex": "1 1 100px"
-                                        },
-                                        {
-                                            "key": "accessories[].effects.rainbow",
-                                            "flex": "1 1 100px"
-                                        },
-                                        {
-                                            "key": "accessories[].effects.raindrop",
+                                            "key": "accessories[].effects.Lightning",
                                             "flex": "1 1 100px"
                                         }
                                     ]
@@ -250,11 +231,30 @@
                                     "flex-direction": "row",
                                     "items": [
                                         {
-                                            "key": "accessories[].effects.spring",
+                                            "key": "accessories[].effects.Ocean",
                                             "flex": "1 1 100px"
                                         },
                                         {
-                                            "key": "accessories[].effects.valentines",
+                                            "key": "accessories[].effects.Rainbow",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.Raindrop",
+                                            "flex": "1 1 100px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "flex",
+                                    "displayFlex": true,
+                                    "flex-direction": "row",
+                                    "items": [
+                                        {
+                                            "key": "accessories[].effects.Spring",
+                                            "flex": "1 1 100px"
+                                        },
+                                        {
+                                            "key": "accessories[].effects.Valentines",
                                             "flex": "1 1 100px"
                                         },
                                         {
