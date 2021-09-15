@@ -95,8 +95,14 @@ platforms: [
     * *\<effectName\>* (optional): boolean to enable a specific built-in effect
     * *CustomEffects* (optional): array containing any custom effects to create:
       * *name* (optional): the name of the custom effect
-      * *json* (optional): the json for the custom effect (see [CustomLightingEffects.md](CustomLightingEffects.md) for more information)
+      * *json* (optional): the json for the custom effect*
 * *debug* (optional): boolean to enable more verbose logging
+
+### Lighting Effects
+
+Stateless Switches (they turn off after 1 second) are created if you include any of the `effects` object in your `config.json`.  All 14 pre-defined Lighting Effects are available to be created and toggled for any Lightstrip you configure.  Additionally, custom Lighting Effects can be created*
+
+\*see [CustomLightingEffects.md](CustomLightingEffects.md) for more information
 
 ## Characteristic Errors
 
