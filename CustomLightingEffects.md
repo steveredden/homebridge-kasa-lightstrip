@@ -4,7 +4,7 @@
 
 Create a Custom Effect in the Kasa app, or consider trying to [build your own](#BYOE) programmatically.  Set the strip to be actively using your Custom Effect.
 
-Once running, to retrieve a properly-formatted JSON string you will need to execute the following command in your environment.  Make sure your environment has the [python-kasa](https://github.com/python-kasa/python-kasa#readme) library installed (validate your installation [here](README.md#Validation)).  Then execute the following:
+Once your Effect is running, to retrieve a properly-formatted JSON string you will need to execute the following command in your environment.  Make sure your environment has the [python-kasa](https://github.com/python-kasa/python-kasa#readme) library installed (validate your installation [here](README.md#Validation)).  Then execute the following:
 
 
 ```sh
