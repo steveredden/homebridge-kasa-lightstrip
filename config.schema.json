@@ -3,7 +3,7 @@
     "pluginType": "platform",
     "singular": true,
     "headerDisplay": "Plugin to utilize [python-kasa](https://github.com/python-kasa/python-kasa) to control Kasa Lightstrips",
-    "footerDisplay": "For more information, see the [README.md](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/main/README.md)<p>For Custom Lighting Effect instructions see the [CustomLightingEffects.md](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/main/CustomLightingEffects.md)",
+    "footerDisplay": "For more information, see the [README.md](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/main/README.md)<p>For Custom Lighting Effect instructions see the [CustomLightingEffects.md](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/main/docs/CustomLightingEffects.md)",
     "schema": {
         "type": "object",
         "properties": {

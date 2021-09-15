@@ -102,7 +102,7 @@ platforms: [
 
 Stateless Switches (they turn off after 1 second) are created if you include any of the `effects` object in your `config.json`.  All 14 pre-defined Lighting Effects are available to be created and toggled for any Lightstrip you configure.  Additionally, custom Lighting Effects can be created*
 
-\*see [CustomLightingEffects.md](CustomLightingEffects.md) for more information
+\*see [CustomLightingEffects.md](docs/CustomLightingEffects.md) for more information
 
 ## Characteristic Errors
 
