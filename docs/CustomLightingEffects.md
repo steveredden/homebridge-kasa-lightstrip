@@ -13,17 +13,17 @@ kasa --host "yourIP" --lightstrip raw-command smartlife.iot.lighting_effect get_
 
 ...replacing `yourIP` with the actual IP address:
 
-![grabbingCustomEffectJSON](img/gettingCustomEffectJSON.png)
+![grabbingCustomEffectJSON](../img/gettingCustomEffectJSON.png)
 
 The output should be pasted into your `Custom Effects JSON` field:
 
 #### Using homebridge-ui:
 
-![setJSONviaUI](img/setJSONviaUI.png)
+![setJSONviaUI](../img/setJSONviaUI.png)
 
 #### ...or manually in your config.json:
 
-![setJSONviaConfig](img/setJSONviaConfig.png)
+![setJSONviaConfig](../img/setJSONviaConfig.png)
 
 ## Removing a Custom Effect
 
