@@ -70,8 +70,8 @@ platforms: [
                 "name": "Couch Strip",
                 "ip": "10.10.10.10",
                 "effects": {
-                    "aurora": true,
-                    "hanukkah": true,
+                    "Aurora": true,
+                    "Hanukkah": true,
                     "CustomEffects": [
                         {
                             "name": "MyCustomEffect1",
