@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/homebridge/branding/raw/master/logos/homebridge-wordmark-logo-vertical.png" width="150">
+    <a href="https://homebridge.io/"><img src="https://github.com/homebridge/branding/raw/master/logos/homebridge-wordmark-logo-vertical.png" width="190"/></a>
 </p>
 
 [![GitHub license](https://badgen.net/github/license/steveredden/homebridge-kasa-lightstrip)](https://github.com/steveredden/homebridge-kasa-lightstrip/blob/main/LICENSE)
@@ -8,12 +8,13 @@
 [![Npm package version](https://badgen.net/npm/v/homebridge-kasa-lightstrip)](https://npmjs.com/package/homebridge-kasa-lightstrip)
 [![Npm package total downloads](https://badgen.net/npm/dt/homebridge-kasa-lightstrip)](https://www.npmjs.com/package/homebridge-kasa-lightstrip)
 
-
 # homebridge-kasa-lightstrip
 
 `homebridge-kasa-lightstrip` is a [Homebridge](https://homebridge.io) plugin that exposes tp-link kasa light strip devices to [Apple's](https://www.apple.com) [HomeKit](https://www.apple.com/ios/home) smart home platform.
 
 This plugin was developed as a stop-gap to provide integration of Kasa's light strips, while the [far superior] plugin ([homebridge-tplink-smarthome](https://github.com/plasticrake/homebridge-tplink-smarthome#readme)) lacks support!
+
+This plugin creates Lightbulb accessories for you to integrate with your lightstrips.  It can also, optionally, create stateless Switch accessories to enable Light Effects.
 
 ## Prerequisites
 
@@ -63,10 +64,21 @@ Device names and IP Addresses must be configured manually in current state:
 platforms: [
     {
         "platform": "HomebridgeKasaLightstrip",
+        "name": "KasaLightstrip",
         "accessories": [
             {
                 "name": "Couch Strip",
-                "ip": "10.10.10.10"
+                "ip": "10.10.10.10",
+                "effects": {
+                    "aurora": true,
+                    "hanukkah": true,
+                    "CustomEffects": [
+                        {
+                            "name": "MyCustomEffect1",
+                            "json": "{'custom':1,'id':'xqUxDhbAhNLqulcuRMyPBmVGyTOyEMEu','brightness':100,'name':'MyCustomEffect1','segments':[0],'expansion_strategy':1,'enable':1,'type':'sequence','duration':0,'transition':1500,'direction':4,'spread':7,'repeat_times':0,'sequence':[[120,100,100],[240,100,100],[260,100,100],[280,100,100]]}"
+                        }
+                    ]
+                }
             }
         ],
         "debug": false
@@ -74,11 +86,23 @@ platforms: [
 ]
 ```
 
-* **platform** (mandatory): the name of this plugin
-* **accessories** (mandatory):  array containing the devices and their info:
+* **platform** (mandatory): the name of this
+* *name* (optional): platform name to display in logs
+* **accessories** (mandatory): array containing the devices and their info:
   * **name** (mandatory): the name of the accessory to create
   * **ip** (mandatory): the IP address of the device
+  * *effects* (optional): array containing any effects to create:
+    * *\<effectName\>* (optional): boolean to enable a specific built-in effect
+    * *CustomEffects* (optional): array containing any custom effects to create:
+      * *name* (optional): the name of the custom effect
+      * *json* (optional): the json for the custom effect*
 * *debug* (optional): boolean to enable more verbose logging
+
+### Lighting Effects
+
+Stateless Switches (they turn off after 1 second) are created if you include any of the `effects` object in your `config.json`.  All 14 pre-defined Lighting Effects are available to be created and toggled for any Lightstrip you configure.  Additionally, custom Lighting Effects can be created.
+
+\*see [CustomLightingEffects.md](docs/CustomLightingEffects.md) for more information
 
 ## Characteristic Errors
 
@@ -87,7 +111,11 @@ Erorrs may common due to the nature of the implementation:  Flooding your device
 It is most often seen with the Brightness slider -> as you slide, the Home app can send numerous Brightness values, resulting in numerous `kasa` executions.  You'll see the following displayed in the log:
 
 ```sh
-[homebridge-kasa-lightstrip] StripName - Error setting characteristic 'Brightness'
+[KasaLightstrip] StripName - Error setting characteristic 'Brightness'
 ```
 
 Attempt to slow your inputs! :thinking:  Or speed your swipe?! :man_shrugging:
+<br><hr><br>
+<p align="center">
+    <a href="https://buymeacoffee.com/steveredden"><img src="img/bmc-new-logo.png" width="230"/></a>
+</p>

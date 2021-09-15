@@ -1,0 +1,34 @@
+{
+    "custom": 0,
+    "id": "oJjUMosgEMrdumfPANKbkFmBcAdEQsPy",
+    "brightness": 30,
+    "name": "Ocean",
+    "segments": [
+        0
+    ],
+    "expansion_strategy": 1,
+    "enable": 1,
+    "type": "sequence",
+    "duration": 0,
+    "transition": 2000,
+    "direction": 3,
+    "spread": 16,
+    "repeat_times": 0,
+    "sequence": [
+        [
+            198,
+            84,
+            30
+        ],
+        [
+            198,
+            70,
+            30
+        ],
+        [
+            198,
+            10,
+            30
+        ]
+    ]
+}

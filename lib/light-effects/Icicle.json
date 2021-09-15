@@ -1,0 +1,44 @@
+{
+    "custom": 0,
+    "id": "joqVjlaTsgzmuQQBAlHRkkPAqkBUiqeb",
+    "brightness": 70,
+    "name": "Icicle",
+    "segments": [
+        0
+    ],
+    "expansion_strategy": 1,
+    "enable": 1,
+    "type": "sequence",
+    "duration": 0,
+    "transition": 400,
+    "direction": 4,
+    "spread": 3,
+    "repeat_times": 0,
+    "sequence": [
+        [
+            190,
+            100,
+            70
+        ],
+        [
+            190,
+            100,
+            70
+        ],
+        [
+            190,
+            30,
+            50
+        ],
+        [
+            190,
+            100,
+            70
+        ],
+        [
+            190,
+            100,
+            70
+        ]
+    ]
+}
