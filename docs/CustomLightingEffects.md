@@ -36,5 +36,5 @@ I haven't found a great way to programmatically check if a once-added Custom Eff
 It seems like you don't need to have actually created a Custom Effect in the Kasa app for it to work, and you can just shove a properly formatted JSON string at the `set_lighting_effect` service.  YMMV :truck:
 <br><hr><br>
 <p align="center">
-    <a href="https://buymeacoffee.com/steveredden"><img src="img/bmc-new-logo.png" width="230"/></a>
+    <a href="https://buymeacoffee.com/steveredden"><img src="../img/bmc-new-logo.png" width="230"/></a>
 </p>
