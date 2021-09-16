@@ -20,12 +20,20 @@ This plugin creates Lightbulb accessories for you to integrate with your lightst
 
 The [python-kasa](https://github.com/python-kasa/python-kasa) library is required for this plugin.  Credit to that team and the maintainers! :trophy::clap:
 
-Installation instructions for [Homebridge Raspberry Pi Image](https://github.com/homebridge/homebridge-raspbian-image/wiki/Getting-Started):
+#### Installation instructions for [Homebridge Raspberry Pi Image](https://github.com/homebridge/homebridge-raspbian-image/wiki/Getting-Started):
 
 ```sh
 sudo apt install python3-pip
 sudo pip3 install python-kasa --pre
 ```
+
+#### Installation instructions for the [onzu/homebridge Docker Container](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Docker):
+
+```sh
+sudo docker exec -it homebridge sudo pip3 install python-kasa
+```
+
+...where `homebridge` is your container name.  You can get your container name by typing `sudo docker ps`.
 
 #### Validation
 
