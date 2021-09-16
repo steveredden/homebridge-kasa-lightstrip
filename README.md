@@ -91,7 +91,7 @@ platforms: [
 * **accessories** (mandatory): array containing the devices and their info:
   * **name** (mandatory): the name of the accessory to create
   * **ip** (mandatory): the IP address of the device
-  * *effects* (optional): array containing any effects to create:
+  * *effects* (optional): object containing any effects to create:
     * *\<effectName\>* (optional): boolean to enable a specific built-in effect
     * *CustomEffects* (optional): array containing any custom effects to create:
       * *name* (optional): the name of the custom effect
