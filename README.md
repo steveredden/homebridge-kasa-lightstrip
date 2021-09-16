@@ -64,7 +64,6 @@ Device names and IP Addresses must be configured manually in current state:
 platforms: [
     {
         "platform": "HomebridgeKasaLightstrip",
-        "name": "KasaLightstrip",
         "accessories": [
             {
                 "name": "Couch Strip",
@@ -81,13 +80,13 @@ platforms: [
                 }
             }
         ],
-        "debug": false
+        "debug": false,
+        "name": "KasaLightstrip"
     }
 ]
 ```
 
 * **platform** (mandatory): the name of this
-* *name* (optional): platform name to display in logs
 * **accessories** (mandatory): array containing the devices and their info:
   * **name** (mandatory): the name of the accessory to create
   * **ip** (mandatory): the IP address of the device
@@ -96,6 +95,7 @@ platforms: [
     * *CustomEffects* (optional): array containing any custom effects to create:
       * *name* (optional): the name of the custom effect
       * *json* (optional): the json for the custom effect*
+* *name* (optional): platform name to display in logs
 * *debug* (optional): boolean to enable more verbose logging
 
 ### Lighting Effects
