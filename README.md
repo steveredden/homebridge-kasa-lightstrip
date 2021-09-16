@@ -125,5 +125,5 @@ It is most often seen with the Brightness slider -> as you slide, the Home app c
 Attempt to slow your inputs! :thinking:  Or speed your swipe?! :man_shrugging:
 <br><hr><br>
 <p align="center">
-    <a href="https://buymeacoffee.com/steveredden"><img src="img/bmc-new-logo.png" width="230"/></a>
+    <a href="https://buymeacoffee.com/steveredden"><img src="img/bmc-new-logo.jpg" width="230"/></a>
 </p>
