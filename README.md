@@ -80,8 +80,8 @@ platforms: [
                 }
             }
         ],
-        "debug": false,
-        "name": "KasaLightstrip"
+        "name": "KasaLightstrip",
+        "debug": false
     }
 ]
 ```
