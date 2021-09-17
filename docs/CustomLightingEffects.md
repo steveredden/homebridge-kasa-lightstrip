@@ -29,7 +29,6 @@ To create "buttons" for Custom Effects you need to do the following:
 1. Execute the below command ...replacing `yourIP` with the device's IP address:
    * *Make sure your environment has the [python-kasa](https://github.com/python-kasa/python-kasa#readme) library installed (validate your installation [here](README.md#Validation))*
 
-
 ```sh
 kasa --host "yourIP" --lightstrip raw-command smartlife.iot.lighting_effect get_lighting_effect | sed "s/ //g"
 ```
