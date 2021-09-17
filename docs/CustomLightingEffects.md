@@ -1,17 +1,38 @@
-# Custom Lighting Effects
+# Lighting Effects
 
-## Procedure
+## Built-in Lighting Effects
 
-Create a Custom Effect in the Kasa app, or consider trying to [build your own](#BYOE) programmatically.  Set the strip to be actively using your Custom Effect.
+The following Kasa-released effects are created by editing your configuration:
 
-Once your Effect is running, to retrieve a properly-formatted JSON string you will need to execute the following command in your environment.  Make sure your environment has the [python-kasa](https://github.com/python-kasa/python-kasa#readme) library installed (validate your installation [here](README.md#Validation)).  Then execute the following:
+<table>
+  <tr><td><code>Aurora</code></td><td><code>Bubbling Cauldron</code></td><td><code>Candy Cane</code></td></tr>
+  <tr><td><code>Christmas</code></td><td><code>Flicker</code></td><td><code>Hanukkah</code></td></tr>
+  <tr><td><code>Haunted Mansion</code></td><td><code>Icicle</code></td><td><code>Lightning</code></td></tr>
+  <tr><td><code>Ocean</code></td><td><code>Rainbow</code></td><td><code>Raindrop</code></td></tr>
+  <tr><td><code>Spring</code></td><td><code>Valentines</code></td><td>&nbsp;</td></tr>
+</table>
+
+#### Using homebridge-ui:
+
+![setBultinviaUI](../img/setBuiltinviaUI.png)
+
+#### ...or manually in your config.json:
+
+![setBultinviaConfig](../img/setBuiltinviaConfig.png)
+
+## Procedure for Custom Effects
+
+To create "buttons" for Custom Effects you need to do the following:
+
+1. Set the strip to be actively using your Custom Effect.  
+   * *Use an existing Custom Effect or create one in the Kasa app, or even consider trying to [build your own](#BYOE) programmatically*
+1. Execute the below command ...replacing `yourIP` with the device's IP address:
+   * *Make sure your environment has the [python-kasa](https://github.com/python-kasa/python-kasa#readme) library installed (validate your installation [here](README.md#Validation))*
 
 
 ```sh
 kasa --host "yourIP" --lightstrip raw-command smartlife.iot.lighting_effect get_lighting_effect | sed "s/ //g"
 ```
-
-...replacing `yourIP` with the actual IP address:
 
 ![grabbingCustomEffectJSON](../img/gettingCustomEffectJSON.png)
 
