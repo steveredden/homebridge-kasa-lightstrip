@@ -59,8 +59,8 @@ sudo npm install -g homebridge-kasa-lightstrip
 
 ### Kasa Light Strips
 
-* [KL400L5](https://www.kasasmart.com/us/products/smart-lighting/product-kl400l5)
-* [KL430](https://www.kasasmart.com/us/products/smart-lighting/kasa-smart-led-light-strip-kl430)
+* [KL400L5](https://www.kasasmart.com/us/products/smart-lighting/product-kl400l5) - Brightness, Hue, Saturation, Effects (via stateless switch)
+* [KL430](https://www.kasasmart.com/us/products/smart-lighting/kasa-smart-led-light-strip-kl430) - ""
 
 ## Configuration
 
@@ -94,7 +94,7 @@ platforms: [
 ]
 ```
 
-* **platform** (mandatory): the name of this
+* **platform** (mandatory): the name of the plugin
 * **accessories** (mandatory): array containing the devices and their info:
   * **name** (mandatory): the name of the accessory to create
   * **ip** (mandatory): the IP address of the device
