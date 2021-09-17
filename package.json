@@ -17,9 +17,15 @@
   "keywords": [
     "homebridge",
     "homebridge-plugin",
+    "tplink",
     "kasa",
     "lightstrip",
-    "homekit"
+    "kl430",
+    "homekit",
+    "home",
+    "automation",
+    "home-automation",
+    "smarthome"
   ],
   "author": "steveredden",
   "license": "MIT",
