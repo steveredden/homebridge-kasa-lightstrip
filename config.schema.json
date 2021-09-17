@@ -202,7 +202,8 @@
                                             "flex": "1 1 100px"
                                         },
                                         {
-                                            "key": "accessories[].effects.Hanukkah"
+                                            "key": "accessories[].effects.Hanukkah",
+                                            "flex": "1 1 100px"
                                         }
                                     ]
                                 },
