@@ -14,6 +14,10 @@
     "type": "git",
     "url": "git+https://github.com/steveredden/homebridge-kasa-lightstrip.git"
   },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/steveredden"
+  },
   "keywords": [
     "homebridge",
     "homebridge-plugin",
