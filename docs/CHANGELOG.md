@@ -2,6 +2,12 @@
 
 ## Changes per release of [homebridge-kasa-lightstrip](https://github.com/steveredden/homebridge-kasa-lightstrip/releases)
 
+### v2.0.1
+
+* Additional keywords for package.json
+* Supplemental documentation for Lighting Effects and general README
+* Code optimization / reduction
+
 ### v2.0.0
 
 * Complete refactor of code structure, breaking into different files
