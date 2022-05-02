@@ -41,7 +41,7 @@ sudo docker exec -it homebridge sudo pip3 install python-kasa==0.4.0.dev3
 
 You can validate that the correct version of `python-kasa` library is installed by executing `kasa --version` at the command line of your environment:
 
-![kasa --help output](img/validatePython-kasa.png)
+![kasa --help output](img/validatePython-kasa2.png)
 
 You should see something similar the above output.  If you do not, and you see something like `-bash: kasa: command not found`, you will need to install it (instructions above), or find a way to get it into your environment.  Review the [python-kasa](https://github.com/python-kasa/python-kasa#readme) repository for any additional instructions.
 
