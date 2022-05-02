@@ -20,24 +20,26 @@ This plugin creates Lightbulb accessories for you to integrate with your lightst
 
 The [python-kasa](https://github.com/python-kasa/python-kasa) library is required for this plugin.  Credit to that team and the maintainers! :trophy::clap:
 
+Specifically, version `0.4.0.dev3` is required, as newer iterations (0.4.1+) do not work quickly/effectively.
+
 #### Installation instructions for [Homebridge Raspberry Pi Image](https://github.com/homebridge/homebridge-raspbian-image/wiki/Getting-Started):
 
 ```sh
 sudo apt install python3-pip
-sudo pip3 install python-kasa --pre
+sudo pip3 install python-kasa==0.4.0.dev3
 ```
 
 #### Installation instructions for the [onzu/homebridge Docker Container](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Docker):
 
 ```sh
-sudo docker exec -it homebridge sudo pip3 install python-kasa
+sudo docker exec -it homebridge sudo pip3 install python-kasa==0.4.0.dev3
 ```
 
 ...where `homebridge` is your container name.  You can get your container name by typing `sudo docker ps`.
 
 #### Validation
 
-You can validate that the `python-kasa` library is installed by executing `kasa --help` at the command line of your environment:
+You can validate that the correct version of `python-kasa` library is installed by executing `kasa --version` at the command line of your environment:
 
 ![kasa --help output](img/validatePython-kasa.png)
 
