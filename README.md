@@ -29,6 +29,12 @@ sudo apt install python3-pip
 sudo pip3 install python-kasa==0.4.0.dev3
 ```
 
+If you have the incorrect version you can uninstall the library with:
+
+```sh
+sudo pip3 uninstall python-kasa
+```
+
 #### Installation instructions for the [onzu/homebridge Docker Container](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Docker):
 
 ```sh
